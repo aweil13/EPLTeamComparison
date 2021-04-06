@@ -1,0 +1,15 @@
+html {
+  background-color: blue;
+  display: flex;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 53px;
+  color: whitesmoke;
+  font-family: "Bangers";
+  letter-spacing: 6px;
+  font-weight: 100;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9pbmRleC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0k7RUFDQTtFQUNBO0FBQ0o7O0FBRUE7RUFDSTtFQUNEO0VBQ0E7RUFDQTtFQUNBO0FBQ0gsQyIsImZpbGUiOiJtYWluLmNzcyIsInNvdXJjZXNDb250ZW50IjpbImh0bWx7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogYmx1ZTtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xufVxuXG5oMXtcbiAgICBmb250LXNpemU6IDUzcHg7XG4gICBjb2xvcjogd2hpdGVzbW9rZTtcbiAgIGZvbnQtZmFtaWx5OiBcIkJhbmdlcnNcIjtcbiAgIGxldHRlci1zcGFjaW5nOiA2cHg7XG4gICBmb250LXdlaWdodDogMTAwO1xufSJdLCJzb3VyY2VSb290IjoiIn0=*/
