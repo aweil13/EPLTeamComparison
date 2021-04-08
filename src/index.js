@@ -96,7 +96,7 @@ svg.append("path")
 .data(seasonPoints["Southampton"])
 .attr("d", pathData2)
 .attr("class", "line")
-.style("stroke", "blue")
+.style("stroke", "yellow")
 
 
 svg.append("g")
@@ -107,6 +107,5 @@ svg.append("g").call(d3.axisLeft(y))
 
 });
 
-const arsenal = "Arsenal"
 console.log(seasonPoints)
 
