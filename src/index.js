@@ -79,7 +79,7 @@ var x = d3.scaleLinear().range([0, width]);
 var y = d3.scaleLinear().range([height, 0]);
 
 x.domain([0, d3.max(seasonLength)]);
-y.domain([0, d3.max(seasonPoints["Liverpool"][seasonPoints["Liverpool"].length - 1])]);
+y.domain([0, 100]);
 
 
 svg.append("g")
