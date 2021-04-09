@@ -10,7 +10,7 @@ for (let i = 0; i < 39; i++) {
     seasonLength.push(i);    
 }
 
-d3.csv("./data/1819.csv")
+d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/1819.csv")
 .then(data => {
     // loop for extracting teams from season into teams array
     for (let i = 0; i < data.length; i++) {
@@ -60,20 +60,9 @@ d3.csv("./data/1819.csv")
     }
     
 //  Line Graph
-    var margin = {top: 20, right: 20, bottom: 30, left: 50},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
-
-var x = d3.scaleLinear().range([0, width]);
-var y = d3.scaleLinear().range([height, 0]);
-
-// var valueLine1 = d3.line(seasonPoints["Liverpool"])
-
-// var valueLine2 = d3.line(seasonPoints["Southampton"])
-
-var lineGenerator = d3.line();
-var pathData1 = lineGenerator(seasonPoints["Liverpool"])
-var pathData2 = lineGenerator(seasonPoints["Southampton"])
+var margin = {top: 20, right: 20, bottom: 30, left: 50},
+width = 500 - margin.left - margin.right,
+height = 460 - margin.top - margin.bottom;
 
 var svg = d3.select("body").append("svg")
 .attr("width", width + margin.left + margin.right)
@@ -81,22 +70,15 @@ var svg = d3.select("body").append("svg")
 .append("g")
 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-x.domain([0, d3.max(seasonLength)])
+
+
+  // X and Y Axis
+  
+var x = d3.scaleLinear().range([0, width]);
+var y = d3.scaleLinear().range([height, 0]);
+
+x.domain([0, d3.max(seasonLength)]);
 y.domain([0, d3.max(seasonPoints["Liverpool"][seasonPoints["Liverpool"].length - 1])]);
-
-
-
-svg.append("path")
-.data(seasonPoints["Liverpool"])
-.attr("class", "line")
-.style("stroke", "red")
-.attr("d", pathData1);
-
-svg.append("path")
-.data(seasonPoints["Southampton"])
-.attr("d", pathData2)
-.attr("class", "line")
-.style("stroke", "yellow")
 
 
 svg.append("g")
@@ -104,6 +86,25 @@ svg.append("g")
 .call(d3.axisBottom(x));
 
 svg.append("g").call(d3.axisLeft(y))
+
+    
+    svg.append("path")
+    .datum(seasonPoints["Liverpool"])
+    .attr("class", "line")
+    .style("stroke", "red")
+    .attr("d", d3.line().x(d => { return x(d[0])})
+    .y(d => {return y(d[1])})
+    )
+    
+    svg.append("path")
+    .datum(seasonPoints["Southampton"])
+    .attr("class", "line")
+    .style("stroke", "yellow")
+    .attr("d", d3.line().x(d => { return x(d[0]) })
+    .y(d => {return y(d[1]) })
+    )
+  
+
 
 });
 
