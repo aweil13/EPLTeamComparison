@@ -108,13 +108,16 @@ svg.append("g").call(d3.axisLeft(y)).style("fill", "white")
     .y(d => {return y(d[1]) })
     )
     
+
+    // line animations
+
     d3.selectAll(".line").each((d, i) => {
         var totalLength = d3.select("#line" + i).node().getTotalLength();
         
         d3.selectAll("#line" + i).attr("stroke-dasharray", totalLength + " " + totalLength)
         .attr("stroke-dashoffset", totalLength)
         .transition()
-        .duration(4000)
+        .duration(2500)
         .delay(100*i)
         .ease(d3.easeSin)
         .attr("stroke-dashoffset", 0)
