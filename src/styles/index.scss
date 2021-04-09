@@ -1,17 +1,27 @@
 html{
-    background-color: blue;
+    background-color: black;
     display: flex;
     justify-content: center;
+    height: 100%;
+    width: 100%;
 }
 
 h1{
-    font-size: 53px;
+   font-size: 53px;
    color: whitesmoke;
    font-family: "Bangers";
    letter-spacing: 6px;
    font-weight: 100;
+   margin: 0px auto;
+   text-align: center;
+   margin-bottom: 20px;
 }
 
 .line {
     stroke-width: 2px;
+    fill: none;
   }
+
+text{
+    color: white;
+}

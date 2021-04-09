@@ -1,7 +1,9 @@
 html {
-  background-color: blue;
+  background-color: black;
   display: flex;
   justify-content: center;
+  height: 100%;
+  width: 100%;
 }
 
 h1 {
@@ -10,10 +12,18 @@ h1 {
   font-family: "Bangers";
   letter-spacing: 6px;
   font-weight: 100;
+  margin: 0px auto;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .line {
   stroke-width: 2px;
+  fill: none;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9pbmRleC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0k7RUFDQTtFQUNBO0FBQ0o7O0FBRUE7RUFDSTtFQUNEO0VBQ0E7RUFDQTtFQUNBO0FBQ0g7O0FBRUE7RUFDSTtBQUNKLEMiLCJmaWxlIjoibWFpbi5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJodG1se1xuICAgIGJhY2tncm91bmQtY29sb3I6IGJsdWU7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbn1cblxuaDF7XG4gICAgZm9udC1zaXplOiA1M3B4O1xuICAgY29sb3I6IHdoaXRlc21va2U7XG4gICBmb250LWZhbWlseTogXCJCYW5nZXJzXCI7XG4gICBsZXR0ZXItc3BhY2luZzogNnB4O1xuICAgZm9udC13ZWlnaHQ6IDEwMDtcbn1cblxuLmxpbmUge1xuICAgIHN0cm9rZS13aWR0aDogMnB4O1xuICB9Il0sInNvdXJjZVJvb3QiOiIifQ==*/
+text {
+  color: white;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9pbmRleC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0k7RUFDQTtFQUNBO0VBQ0E7RUFDQTtBQUNKOztBQUVBO0VBQ0c7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtBQUNIOztBQUVBO0VBQ0k7RUFDQTtBQUNKOztBQUVBO0VBQ0k7QUFDSixDIiwiZmlsZSI6Im1haW4uY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaHRtbHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiBibGFjaztcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgIGhlaWdodDogMTAwJTtcbiAgICB3aWR0aDogMTAwJTtcbn1cblxuaDF7XG4gICBmb250LXNpemU6IDUzcHg7XG4gICBjb2xvcjogd2hpdGVzbW9rZTtcbiAgIGZvbnQtZmFtaWx5OiBcIkJhbmdlcnNcIjtcbiAgIGxldHRlci1zcGFjaW5nOiA2cHg7XG4gICBmb250LXdlaWdodDogMTAwO1xuICAgbWFyZ2luOiAwcHggYXV0bztcbiAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgIG1hcmdpbi1ib3R0b206IDIwcHg7XG59XG5cbi5saW5lIHtcbiAgICBzdHJva2Utd2lkdGg6IDJweDtcbiAgICBmaWxsOiBub25lO1xuICB9XG5cbnRleHR7XG4gICAgY29sb3I6IHdoaXRlO1xufVxuIl0sInNvdXJjZVJvb3QiOiIifQ==*/
