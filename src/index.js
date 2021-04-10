@@ -3,7 +3,19 @@ import "./styles/index.scss";
 
 let teams = [];
 let allTeamStats = [];
-
+const X_AXIS = [
+    "Points",
+    "Shots", 
+    "Shots on Target",
+    "First Half Goals", 
+    "Second Half Goals", 
+    "Total Goals", 
+    "Goals Against", 
+    "Corners", 
+    "Fouls Committed", 
+    "Fouls Against", 
+    "Yellow Cards", 
+    "Red Cards"]
 
 d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/1819.csv")
 .then(data => {
@@ -17,7 +29,7 @@ d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/18
         }
     }
 
-    // lopp creating seasonStats array of objects
+    // loop creating seasonStats array of objects
     for (let i = 0; i < teams.length; i++) {
         let team = teams[i];
         allTeamStats.push({
