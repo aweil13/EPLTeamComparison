@@ -19,7 +19,7 @@
 ## Architecture and Technology
 * Vanilla Javascript for most code structure and creating search bar.
 * D3 library for rendering statistics in desired format( graphs to be determined).
-* Maybe? R to sort csv files.
+* D3 and JS to grab stats from csv data files and sort them into desired format/organization to render.
 * Webpack to bundle scripts into a single source.
 
 ## Implementation Timeline
@@ -27,7 +27,7 @@
 * Day 2: Implement data obtained from http://www.football-data.co.uk/englandm.php intp rendering using D3.
 * Day 3: Comparison graph and how to pick 2 teams based on user input.
 * Day 4: Search bar.
-* Day5: Finishing touches.
+* Day 5: Finishing touches.
 
 ## Wireframe
 ![image](https://user-images.githubusercontent.com/76187584/113608538-b8dffa80-9618-11eb-9e26-1a4838b19f8d.png)
