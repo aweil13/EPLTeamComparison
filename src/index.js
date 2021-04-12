@@ -2,107 +2,153 @@
 import "./styles/index.scss";
 
 let teams = [];
-let allTeamStats = [];
-const X_AXIS = [
-    "Points",
-    "Shots", 
-    "Shots on Target",
-    "First Half Goals", 
-    "Second Half Goals", 
-    "Total Goals", 
-    "Goals Against", 
-    "Corners", 
-    "Fouls Committed", 
-    "Fouls Against", 
-    "Yellow Cards", 
-    "Red Cards"]
+let seasonPoints = {};
+
+let seasonLength = [];
+
+for (let i = 0; i < 39; i++) {
+    seasonLength.push(i);    
+}
 
 d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/1819.csv")
 .then(data => {
-
-     // loop for extracting teams from season into teams array
-     for (let i = 0; i < data.length; i++) {
+    // loop for extracting teams from season into teams array
+    for (let i = 0; i < data.length; i++) {
         if (!teams.includes(data[i]["HomeTeam"])) {
             teams.push(data[i]["HomeTeam"])
         } else if (!teams.includes(data[i]["AwayTeam"])) {
             teams.push(data[i]["AwayTeam"])
         }
     }
-
-    // loop creating seasonStats array of objects
+    // nested loop for extracting team points from data
     for (let i = 0; i < teams.length; i++) {
         let team = teams[i];
-        allTeamStats.push({
-         "Team": team,
-         "Points": 0,
-         "Shots": 0,
-         "ShotsOnTarget": 0,
-         "FirstHalfGoals": 0,
-         "SecondHalfGoals": 0,
-         "TotalGoals": 0,
-         "GoalsAgainst": 0,
-         "Corners": 0,
-         "FoulsCommited": 0,
-         "FoulsAgainst": 0,
-         "YellowCards": 0,
-         "RedCards": 0   
-        })
-    }
-
-    // nested loop for extracting data and placing it inside seasonStats array of objects
-    for (let i = 0; i < allTeamStats.length; i++) {
-        let team = allTeamStats[i];
-        let teamName = team["Team"];
+        seasonPoints[team] = [[0,0]];
         for (let j = 0; j < data.length; j++) {
             let match = data[j];
-            if (teamName === match["HomeTeam"]){
-               switch (match["FTR"]) {
-                   case "H":
-                       team["Points"] += 3;
-                       break;
-                   case "D":
-                       team["Points"] += 1;
-                       break;   
-                   default:
-                       break;
-               }
-                team["Shots"] += parseInt(match["HS"]);
-                team["ShotsOnTarget"] += parseInt(match["HST"]);
-                team["FirstHalfGoals"] += parseInt(match["HTHG"]);
-                team["SecondHalfGoals"] += (parseInt(match["FTHG"]) - parseInt(match["HTHG"]));
-                team["TotalGoals"] += parseInt(match["FTHG"]);
-                team["GoalsAgainst"] += parseInt(match["FTAG"]);
-                team["Corners"] += parseInt(match["HC"]);
-                team["FoulsCommited"] += parseInt(match["HF"]);
-                team["FoulsAgainst"] += parseInt(match["AF"]);
-                team["YellowCards"] += parseInt(match["HY"]);
-                team["RedCards"] += parseInt(match["HR"]);
-            } else if (teamName === match["AwayTeam"]){
+            let prevPoints = seasonPoints[team][seasonPoints[team].length - 1][1]
+            let prevMatchday = seasonPoints[team][seasonPoints[team].length - 1][0]
+            // switch statements for building team points array
+            if (match["HomeTeam"] === team){
                 switch (match["FTR"]) {
+                    case "H":
+                        seasonPoints[team].push([prevMatchday + 1 ,prevPoints + 3]);
+                        break;
                     case "A":
-                        team["Points"] += 3 
+                        seasonPoints[team].push([prevMatchday + 1 ,prevPoints]);
                         break;
                     case "D":
-                        team["Points"] += 1
+                        seasonPoints[team].push([prevMatchday + 1 , prevPoints + 1]);    
                     default:
                         break;
                 }
-                team["Shots"] += parseInt(match["AS"]);
-                team["ShotsOnTarget"] += parseInt(match["AST"]);
-                team["FirstHalfGoals"] += parseInt(match["HTAG"]);
-                team["SecondHalfGoals"] += (parseInt(match["FTAG"]) - parseInt(match["HTAG"]));
-                team["TotalGoals"] += parseInt(match["FTAG"]);
-                team["GoalsAgainst"] += parseInt(match["FTHG"]);
-                team["Corners"] += parseInt(match["AC"]);
-                team["FoulsCommited"] += parseInt(match["AF"]);
-                team["FoulsAgainst"] += parseInt(match["HF"]);
-                team["YellowCards"] += parseInt(match["AY"]);
-                team["RedCards"] += parseInt(match["AR"]);
+            } else if (match["AwayTeam"] === team){
+                switch (match["FTR"]) {
+                    case "A":
+                        seasonPoints[team].push([prevMatchday + 1 ,prevPoints + 3]);
+                        break;
+                    case "H":
+                        seasonPoints[team].push([prevMatchday + 1 ,prevPoints]);
+                        break;
+                    case "D":
+                        seasonPoints[team].push([prevMatchday + 1 , prevPoints + 1]);   
+                    default:
+                        break;
+                }
             }
-
         }
     }
-    console.log(data);
-})
+    
+//  Line Graph
+var margin = {top: 20, right: 20, bottom: 70, left: 50},
+width = 660 - margin.left - margin.right,
+height = 600 - margin.top - margin.bottom;
 
-console.log(allTeamStats);
+var svg = d3.select("body").append("svg")
+.attr("width", width + margin.left + margin.right)
+.attr("height", height + margin.top + margin.bottom)
+.append("g")
+.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+  // X and Y Axis
+  
+var x = d3.scaleLinear().range([0, width]);
+var y = d3.scaleLinear().range([height, 0]);
+
+x.domain([0, d3.max(seasonLength)]);
+y.domain([0, 100]);
+
+
+svg.append("g")
+.attr("transform", "translate(0," + height + ")")
+.call(d3.axisBottom(x)).style("fill", "white")
+
+svg.append("g").call(d3.axisLeft(y)).style("fill", "white")
+
+    // Lines and animation
+
+    svg.append("path")
+    .datum(seasonPoints["Liverpool"])
+    .attr("class", "line")
+    .attr("id", "line0")
+    .style("stroke", "red")
+    .attr("d", d3.line().x(d => { return x(d[0])})
+    .y(d => {return y(d[1])})
+    )
+    
+    svg.append("path")
+    .datum(seasonPoints["Southampton"])
+    .attr("class", "line")
+    .attr("id", "line1")
+    .style("stroke", "yellow")
+    .attr("d", d3.line().x(d => { return x(d[0]) })
+    .y(d => {return y(d[1]) })
+    )
+    
+
+    // line animations
+
+    d3.selectAll(".line").each((d, i) => {
+        var totalLength = d3.select("#line" + i).node().getTotalLength();
+        
+        d3.selectAll("#line" + i).attr("stroke-dasharray", totalLength + " " + totalLength)
+        .attr("stroke-dashoffset", totalLength)
+        .transition()
+        .duration(2500)
+        .delay(100*i)
+        .ease(d3.easeSin)
+        .attr("stroke-dashoffset", 0)
+    })
+  
+
+  
+  
+    svg.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - margin.left - 5)
+    .attr("x", 0 - (height/2))
+    .attr("dy", "1em")
+    .style("text-anchor", "middle")
+    .attr("class", "yaxis")
+    .text("Points")
+    .attr("font-size", "22px")
+    .style('fill', 'white')
+
+    svg.append("text")
+    .attr("transform", "translate (" + (width/2) + " ," + (height + margin.top + 25) + ")")
+    .attr("class", "xaxis")
+    .style("text-anchor", "middle")
+    .text("Matchday")
+    .attr("font-size", "22px")
+    .style('fill', 'white')
+
+    svg.append("circle").attr("cx", 100).attr("cy", 50).attr("r", 4).style("fill", "red")
+    svg.append("circle").attr("cx", 100).attr("cy", 70).attr("r", 4).style("fill", "yellow")
+    svg.append("text").attr("x", 120).attr("y", 50).style("fill", "white").text("Liverpool").attr("alignment-baseline","middle")
+    svg.append("text").attr("x", 120).attr("y", 70).style("fill", "white").text("Southampton").attr("alignment-baseline","middle")
+
+  
+
+});

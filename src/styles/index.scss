@@ -25,3 +25,27 @@ h1{
 text{
     color: white;
 }
+
+
+footer{
+    position: absolute;
+    display: flex;
+    bottom: 0;
+    height: 2.5rem;
+    width: 500px;
+    justify-content: center;
+}
+
+.footer-image{
+    width: 30px;
+    height: 30px;
+}
+
+footer span{
+    color: white;
+    margin-right: 30px;
+    height: 2.0rem;
+    font-size: 22px;
+    font-family: "Bangers";
+    letter-spacing: 2px;
+}
