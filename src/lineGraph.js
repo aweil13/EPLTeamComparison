@@ -1,6 +1,3 @@
-
-import "./styles/index.scss";
-
 let teams = [];
 let seasonPoints = {};
 
@@ -152,3 +149,5 @@ svg.append("g").call(d3.axisLeft(y)).style("fill", "white")
   
 
 });
+
+console.log(seasonPoints)
