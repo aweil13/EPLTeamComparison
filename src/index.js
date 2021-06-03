@@ -14,7 +14,7 @@ const X_AXIS = [
     "Total Goals", 
     "Goals Against", 
     "Corners", 
-    "Fouls Committed", 
+    "Fouls Commited", 
     "Fouls Against", 
     "Yellow Cards", 
     "Red Cards"];
@@ -28,7 +28,7 @@ const X_AXIS_DATA = [
     {"Total Goals": {"Liverpool": 0, "Southampton": 0}}, 
     {"Goals Against": {"Liverpool": 0, "Southampton": 0}}, 
     {"Corners": {"Liverpool": 0, "Southampton": 0}}, 
-    {"Fouls Committed": {"Liverpool": 0, "Southampton": 0}}, 
+    {"Fouls Commited": {"Liverpool": 0, "Southampton": 0}}, 
     {"Fouls Against": {"Liverpool": 0, "Southampton": 0}}, 
     {"Yellow Cards": {"Liverpool": 0, "Southampton": 0}}, 
     {"Red Cards": {"Liverpool": 0, "Southampton": 0}}
@@ -68,7 +68,7 @@ d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/18
          "Team": team,
          "Points": 0,
          "Shots": 0,
-         "Shots On Target": 0,
+         "Shots on Target": 0,
          "First Half Goals": 0,
          "Second Half Goals": 0,
          "Total Goals": 0,
@@ -99,7 +99,7 @@ d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/18
                        break;
                }
                 team["Shots"] += parseInt(match["HS"]);
-                team["Shots On Target"] += parseInt(match["HST"]);
+                team["Shots on Target"] += parseInt(match["HST"]);
                 team["First Half Goals"] += parseInt(match["HTHG"]);
                 team["Second Half Goals"] += (parseInt(match["FTHG"]) - parseInt(match["HTHG"]));
                 team["Total Goals"] += parseInt(match["FTHG"]);
@@ -120,7 +120,7 @@ d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/18
                         break;
                 }
                 team["Shots"] += parseInt(match["AS"]);
-                team["Shots On Target"] += parseInt(match["AST"]);
+                team["Shots on Target"] += parseInt(match["AST"]);
                 team["First Half Goals"] += parseInt(match["HTAG"]);
                 team["Second Half Goals"] += (parseInt(match["FTAG"]) - parseInt(match["HTAG"]));
                 team["Total Goals"] += parseInt(match["FTAG"]);
@@ -182,7 +182,7 @@ d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/18
                 totalGoalsArray.push({team: "Liverpool", value: allTeamStats[i]["Total Goals"]});
                 goalsAgainstArray.push({team: "Liverpool", value: allTeamStats[i]["Goals Against"]});
                 cornersArray.push({team: "Liverpool", value: allTeamStats[i]["Corners"]});
-                foulsCommittedArray.push({team: "Liverpool", value: allTeamStats[i]["Fouls Committed"]});
+                foulsCommittedArray.push({team: "Liverpool", value: allTeamStats[i]["Fouls Commited"]});
                 foulsAgainstArray.push({team: "Liverpool", value: allTeamStats[i]["Fouls Against"]});
                 yellowCardsArray.push({team: "Liverpool", value: allTeamStats[i]["Yellow Cards"]});
                 redCardsArray.push({team: "Liverpool", value: allTeamStats[i]["Red Cards"]});
@@ -196,7 +196,7 @@ d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/18
                 totalGoalsArray.push({team: "Southampton", value: allTeamStats[i]["Total Goals"]});
                 goalsAgainstArray.push({team: "Southampton", value: allTeamStats[i]["Goals Against"]});
                 cornersArray.push({team: "Southampton", value: allTeamStats[i]["Corners"]});
-                foulsCommittedArray.push({team: "Southampton", value: allTeamStats[i]["Fouls Committed"]});
+                foulsCommittedArray.push({team: "Southampton", value: allTeamStats[i]["Fouls Commited"]});
                 foulsAgainstArray.push({team: "Southampton", value: allTeamStats[i]["Fouls Against"]});
                 yellowCardsArray.push({team: "Southampton", value: allTeamStats[i]["Yellow Cards"]});
                 redCardsArray.push({team: "Southampton", value: allTeamStats[i]["Red Cards"]});
@@ -229,6 +229,7 @@ d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/18
     
     const xAxis = svg.append("g")
     .attr("transform", `translate(0, ${height})`)
+    .attr("class", "X-axis")
 
     // Y-Axis initialization
     const y = d3.scaleLinear()
@@ -307,7 +308,7 @@ d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/18
             case "Corners":
                 update(cornersArray);
                 break;
-            case "Fouls Committed":
+            case "Fouls Commited":
                 update(foulsCommittedArray);
                 break;
             case "Fouls Against":
@@ -324,10 +325,7 @@ d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/18
         }
     })
 
-    console.log(compareTeamsStats);
-    console.log(allTeamStats);
-    console.log(data.columns.slice(1))
-    console.log(X_AXIS_DATA);
+   
 })
 
 
