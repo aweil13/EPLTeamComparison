@@ -1,3 +1,6 @@
+
+import "./styles/index.scss";
+
 let teams = [];
 let seasonPoints = {};
 let seasonShots = {};
@@ -12,6 +15,21 @@ let seasonFoulsAgainst = {};
 let seasonYellowCards = {};
 let seasonRedCards = {};
 let seasonLength = [];
+
+const X_AXIS = [
+    "Points",
+    "Shots", 
+    "Shots on Target",
+    "First Half Goals", 
+    "Second Half Goals", 
+    "Total Goals", 
+    "Goals Against", 
+    "Corners", 
+    "Fouls Commited", 
+    "Fouls Against", 
+    "Yellow Cards", 
+    "Red Cards"];
+
 
 for (let i = 0; i < 39; i++) {
     seasonLength.push(i);    
@@ -201,6 +219,9 @@ svg.append("g").call(d3.axisLeft(y)).style("fill", "white")
     svg.append("text").attr("x", 120).attr("y", 70).style("fill", "white").text("Southampton").attr("alignment-baseline","middle")
 
   
-
+    
 });
+
+
+
 
