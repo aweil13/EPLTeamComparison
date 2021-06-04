@@ -3,7 +3,6 @@ import "./styles/index.scss";
 
 let teams = [];
 let allTeamStats = [];
-let compareTeams = ["Liverpool", "Southampton"];
 let compareTeamsStats = [];
 const X_AXIS = [
     "Points",
@@ -230,13 +229,15 @@ d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/18
     const xAxis = svg.append("g")
     .attr("transform", `translate(0, ${height})`)
     .attr("class", "X-axis")
+    .style("fill", "white")
 
     // Y-Axis initialization
     const y = d3.scaleLinear()
     .range([height, 0]);
 
     const yAxis = svg.append("g")
-    .attr("class", "Y-axis");
+    .attr("class", "Y-axis")
+    .style("fill", "white");
 
 
 
@@ -248,7 +249,7 @@ d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/18
         xAxis.call(d3.axisBottom(x))
 
         // Update Y-Axis with relevant values
-        y.domain([0, d3.max(data, d => d.value)]);
+        y.domain([0, d3.max(data, d => d.value + (d.value/10))]);
         yAxis.transition().duration(1000).call(d3.axisLeft(y));
 
         // Create variable for graph

@@ -1,6 +1,16 @@
 let teams = [];
 let seasonPoints = {};
-
+let seasonShots = {};
+let seasonShotsOnTarget = {};
+let seasonFirstHalfGoals = {};
+let seasonSecondHalfGoals = {};
+let seasonGoals = {};
+let seasonGoalsAgainst = {};
+let seasonCorners = {};
+let seasonFoulsCommited = {};
+let seasonFoulsAgainst = {};
+let seasonYellowCards = {};
+let seasonRedCards = {};
 let seasonLength = [];
 
 for (let i = 0; i < 39; i++) {
@@ -21,10 +31,32 @@ d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/18
     for (let i = 0; i < teams.length; i++) {
         let team = teams[i];
         seasonPoints[team] = [[0,0]];
+        seasonShots[team] = [[0,0]];
+        seasonShotsOnTarget[team] = [[0,0]];
+        seasonFirstHalfGoals[team] = [[0,0]];
+        seasonSecondHalfGoals[team] = [[0,0]];
+        seasonGoals[team] = [[0,0]];
+        seasonGoalsAgainst[team] = [[0,0]];
+        seasonCorners[team] = [[0,0]];
+        seasonFoulsCommited[team] = [[0,0]];
+        seasonFoulsAgainst[team] = [[0,0]];
+        seasonYellowCards[team] = [[0,0]];
+        seasonRedCards[team] = [[0,0]];
         for (let j = 0; j < data.length; j++) {
             let match = data[j];
             let prevPoints = seasonPoints[team][seasonPoints[team].length - 1][1]
             let prevMatchday = seasonPoints[team][seasonPoints[team].length - 1][0]
+            let prevShots = seasonShots[team][seasonPoints[team].length - 1][1]
+            let prevShotsOnTarget = seasonShotsOnTarget[team][seasonPoints[team].length - 1][1]
+            let prevFirstHalfGoals = seasonFirstHalfGoals[team][seasonPoints[team].length - 1][1]
+            let prevSecondHalfGoals = seasonSecondHalfGoals[team][seasonPoints[team].length - 1][1]
+            let prevGoals = seasonGoals[team][seasonPoints[team].length - 1][1]
+            let prevGoalsAgainst = seasonGoalsAgainst[team][seasonPoints[team].length - 1][1]
+            let prevCorners = seasonCorners[team][seasonPoints[team].length - 1][1]
+            let prevFoulsCommited = seasonFoulsCommited[team][seasonPoints[team].length - 1][1]
+            let prevFoulsAgainst = seasonFoulsAgainst[team][seasonPoints[team].length - 1][1]
+            let prevYellowCards = seasonYellowCards[team][seasonPoints[team].length - 1][1]
+            let prevRedCards = seasonRedCards[team][seasonPoints[team].length - 1][1]
             // switch statements for building team points array
             if (match["HomeTeam"] === team){
                 switch (match["FTR"]) {
@@ -39,6 +71,17 @@ d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/18
                     default:
                         break;
                 }
+                seasonShots[team].push([prevMatchday + 1, prevShots + parseInt(match["HS"])]);
+                seasonShotsOnTarget[team].push([prevMatchday + 1, prevShotsOnTarget + parseInt(match["HST"])]);
+                seasonFirstHalfGoals[team].push([prevMatchday + 1, prevFirstHalfGoals + parseInt(match["HTHG"])]);
+                seasonSecondHalfGoals[team].push([prevMatchday + 1, prevSecondHalfGoals + (parseInt(match["FTHG"]) - parseInt(match["HTHG"]))]);
+                seasonGoals[team].push([prevMatchday + 1, prevGoals + parseInt(match["FTHG"])]);
+                seasonGoalsAgainst[team].push([prevMatchday + 1, prevGoalsAgainst + parseInt(match["FTAG"])]);
+                seasonCorners[team].push([prevMatchday + 1, prevCorners + parseInt(match["HC"])]);
+                seasonFoulsCommited[team].push([prevMatchday + 1, prevFoulsCommited + parseInt(match["HF"])]);
+                seasonFoulsAgainst[team].push([prevMatchday + 1, prevFoulsAgainst + parseInt(match["AF"])]);
+                seasonYellowCards[team].push([prevMatchday + 1, prevYellowCards + parseInt(match["HY"])]);
+                seasonRedCards[team].push([prevMatchday + 1, prevRedCards + parseInt(match["HR"])]);
             } else if (match["AwayTeam"] === team){
                 switch (match["FTR"]) {
                     case "A":
@@ -52,6 +95,17 @@ d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/18
                     default:
                         break;
                 }
+                seasonShots[team].push([prevMatchday + 1, prevShots + parseInt(match["AS"])]);
+                seasonShotsOnTarget[team].push([prevMatchday + 1, prevShotsOnTarget + parseInt(match["AST"])]);
+                seasonFirstHalfGoals[team].push([prevMatchday + 1, prevFirstHalfGoals + parseInt(match["HTAG"])]);
+                seasonSecondHalfGoals[team].push([prevMatchday + 1, prevSecondHalfGoals + (parseInt(match["FTAG"]) - parseInt(match["HTAG"]))]);
+                seasonGoals[team].push([prevMatchday + 1, prevGoals + parseInt(match["FTAG"])]);
+                seasonGoalsAgainst[team].push([prevMatchday + 1, prevGoalsAgainst + parseInt(match["FTHG"])]);
+                seasonCorners[team].push([prevMatchday + 1, prevCorners + parseInt(match["AC"])]);
+                seasonFoulsCommited[team].push([prevMatchday + 1, prevFoulsCommited + parseInt(match["AF"])]);
+                seasonFoulsAgainst[team].push([prevMatchday + 1, prevFoulsAgainst + parseInt(match["HF"])]);
+                seasonYellowCards[team].push([prevMatchday + 1, prevYellowCards + parseInt(match["AY"])]);
+                seasonRedCards[team].push([prevMatchday + 1, prevRedCards + parseInt(match["AR"])]);
             }
         }
     }
@@ -150,4 +204,3 @@ svg.append("g").call(d3.axisLeft(y)).style("fill", "white")
 
 });
 
-console.log(seasonPoints)
