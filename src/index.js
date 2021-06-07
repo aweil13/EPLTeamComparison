@@ -16,7 +16,7 @@ let seasonYellowCards = {};
 let seasonRedCards = {};
 let seasonLength = [];
 
-const X_AXIS = [
+const STATS = [
     "Points",
     "Shots", 
     "Shots on Target",
@@ -35,7 +35,7 @@ for (let i = 0; i < 39; i++) {
     seasonLength.push(i);    
 }
 
-d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/1819.csv")
+d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/2018-2019.csv")
 .then(data => {
     // loop for extracting teams from season into teams array
     for (let i = 0; i < data.length; i++) {
@@ -89,6 +89,7 @@ d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/18
                     default:
                         break;
                 }
+                // filling up the individual stats objects/array
                 seasonShots[team].push([prevMatchday + 1, prevShots + parseInt(match["HS"])]);
                 seasonShotsOnTarget[team].push([prevMatchday + 1, prevShotsOnTarget + parseInt(match["HST"])]);
                 seasonFirstHalfGoals[team].push([prevMatchday + 1, prevFirstHalfGoals + parseInt(match["HTHG"])]);
@@ -145,8 +146,8 @@ var svg = d3.select("body").append("svg")
 
   svg.append("circle").attr("cx", 100).attr("cy", 50).attr("r", 4).style("fill", "red")
   svg.append("circle").attr("cx", 100).attr("cy", 70).attr("r", 4).style("fill", "yellow")
-  svg.append("text").attr("x", 120).attr("y", 50).style("fill", "white").text("Liverpool").attr("alignment-baseline","middle")
-  svg.append("text").attr("x", 120).attr("y", 70).style("fill", "white").text("Southampton").attr("alignment-baseline","middle")
+  svg.append("text").attr("x", 120).attr("y", 50).style("fill", "white").text("Liverpool 2018-19").attr("alignment-baseline","middle")
+  svg.append("text").attr("x", 120).attr("y", 70).style("fill", "white").text("Southampton 2018-19").attr("alignment-baseline","middle")
 
 
 //  Create a dropdown button to select data output
@@ -154,7 +155,7 @@ const dropDownButton = d3.select("body").append("select")
 
 // Create options for Dropdown
 dropDownButton.selectAll('dataOptions')
-.data(X_AXIS)
+.data(STATS)
 .enter()
 .append('option')
 .text(function(d) {return d})
@@ -261,7 +262,20 @@ const update = (data, title) => {
     .attr("stroke-width", 2.5)
 
   
+    // let line1Length = d3.selectAll(".line1").node().getTotalLength();
+    // let line2Length = d3.selectAll(".line2").node().getTotalLength();
 
+    // d3.selectAll(".line1").attr("stroke-dasharray", line1Length + " " + line1Length)
+    // .attr("stroke-dashoffset", line1Length)
+    // .transition()
+    // .duration(2000)
+    // .delay(200)
+    // .ease(d3.easeSin)
+    // .attr("stroke-dashoffset", 0)
+
+    
+    
+    
    
 
 }

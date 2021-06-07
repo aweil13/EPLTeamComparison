@@ -4,7 +4,7 @@ import "./styles/index.scss";
 let teams = [];
 let allTeamStats = [];
 let compareTeamsStats = [];
-const X_AXIS = [
+const STATS = [
     "Points",
     "Shots", 
     "Shots on Target",
@@ -48,7 +48,7 @@ const redCardsArray = [];
 
 
 
-d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/1819.csv")
+d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/2018-2019.csv")
 .then(data => {
 
      // loop for extracting teams from season into teams array
@@ -155,7 +155,7 @@ d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/18
         const teamName = team["Team"];
         for (let j = 0; j < X_AXIS_DATA.length; j++) {
             const dataGroup = X_AXIS_DATA[j]
-            const key = X_AXIS[j];
+            const key = STATS[j];
             switch (teamName) {
                 case "Liverpool":
                     dataGroup[key][teamName] += team[key]
@@ -275,7 +275,7 @@ d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/18
 
     // Create options for Dropdown
     dropDownButton.selectAll('dataOptions')
-    .data(X_AXIS)
+    .data(STATS)
     .enter()
     .append('option')
     .text(function(d) {return d})

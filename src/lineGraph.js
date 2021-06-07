@@ -16,7 +16,7 @@ let seasonYellowCards = {};
 let seasonRedCards = {};
 let seasonLength = [];
 
-const X_AXIS = [
+const STATS = [
     "Points",
     "Shots", 
     "Shots on Target",
@@ -35,7 +35,7 @@ for (let i = 0; i < 39; i++) {
     seasonLength.push(i);    
 }
 
-d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/1819.csv")
+d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/2018-2019.csv")
 .then(data => {
     // loop for extracting teams from season into teams array
     for (let i = 0; i < data.length; i++) {
@@ -89,6 +89,7 @@ d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/18
                     default:
                         break;
                 }
+                // filling up the individual stats objects/array
                 seasonShots[team].push([prevMatchday + 1, prevShots + parseInt(match["HS"])]);
                 seasonShotsOnTarget[team].push([prevMatchday + 1, prevShotsOnTarget + parseInt(match["HST"])]);
                 seasonFirstHalfGoals[team].push([prevMatchday + 1, prevFirstHalfGoals + parseInt(match["HTHG"])]);
@@ -142,83 +143,192 @@ var svg = d3.select("body").append("svg")
 
 
   // X and Y Axis
-  
-var x = d3.scaleLinear().range([0, width]);
-var y = d3.scaleLinear().range([height, 0]);
 
-x.domain([0, d3.max(seasonLength)]);
-y.domain([0, 100]);
+  svg.append("circle").attr("cx", 100).attr("cy", 50).attr("r", 4).style("fill", "red")
+  svg.append("circle").attr("cx", 100).attr("cy", 70).attr("r", 4).style("fill", "yellow")
+  svg.append("text").attr("x", 120).attr("y", 50).style("fill", "white").text("Liverpool 2018-19").attr("alignment-baseline","middle")
+  svg.append("text").attr("x", 120).attr("y", 70).style("fill", "white").text("Southampton 2018-19").attr("alignment-baseline","middle")
 
 
-svg.append("g")
-.attr("transform", "translate(0," + height + ")")
-.call(d3.axisBottom(x)).style("fill", "white")
+//  Create a dropdown button to select data output
+const dropDownButton = d3.select("body").append("select")
 
-svg.append("g").call(d3.axisLeft(y)).style("fill", "white")
+// Create options for Dropdown
+dropDownButton.selectAll('dataOptions')
+.data(STATS)
+.enter()
+.append('option')
+.text(function(d) {return d})
+.attr("value", d => {return d});
 
-    // Lines and animation
 
-    svg.append("path")
-    .datum(seasonPoints["Liverpool"])
-    .attr("class", "line")
-    .attr("id", "line0")
-    .style("stroke", "red")
-    .attr("d", d3.line().x(d => { return x(d[0])})
-    .y(d => {return y(d[1])})
-    )
-    
-    svg.append("path")
-    .datum(seasonPoints["Southampton"])
-    .attr("class", "line")
-    .attr("id", "line1")
-    .style("stroke", "yellow")
-    .attr("d", d3.line().x(d => { return x(d[0]) })
-    .y(d => {return y(d[1]) })
-    )
-    
-
-    // line animations
-
-    d3.selectAll(".line").each((d, i) => {
-        var totalLength = d3.select("#line" + i).node().getTotalLength();
-        
-        d3.selectAll("#line" + i).attr("stroke-dasharray", totalLength + " " + totalLength)
-        .attr("stroke-dashoffset", totalLength)
-        .transition()
-        .duration(2500)
-        .delay(100*i)
-        .ease(d3.easeSin)
-        .attr("stroke-dashoffset", 0)
-    })
-  
-
-  
-  
+ 
+    // Y-axis label
     svg.append("text")
     .attr("transform", "rotate(-90)")
     .attr("y", 0 - margin.left - 5)
     .attr("x", 0 - (height/2))
     .attr("dy", "1em")
     .style("text-anchor", "middle")
-    .attr("class", "yaxis")
+    .attr("class", "yaxis-text")
     .text("Points")
     .attr("font-size", "22px")
     .style('fill', 'white')
 
-    svg.append("text")
-    .attr("transform", "translate (" + (width/2) + " ," + (height + margin.top + 25) + ")")
-    .attr("class", "xaxis")
-    .style("text-anchor", "middle")
-    .text("Matchday")
-    .attr("font-size", "22px")
-    .style('fill', 'white')
+      // X-axis label
+      svg.append("text")
+      .attr("transform", "translate (" + (width/2) + " ," + (height + margin.top + 25) + ")")
+      .attr("class", "xaxis")
+      .style("text-anchor", "middle")
+      .text("Matchday")
+      .attr("font-size", "22px")
+      .style('fill', 'white')
 
-    svg.append("circle").attr("cx", 100).attr("cy", 50).attr("r", 4).style("fill", "red")
-    svg.append("circle").attr("cx", 100).attr("cy", 70).attr("r", 4).style("fill", "yellow")
-    svg.append("text").attr("x", 120).attr("y", 50).style("fill", "white").text("Liverpool").attr("alignment-baseline","middle")
-    svg.append("text").attr("x", 120).attr("y", 70).style("fill", "white").text("Southampton").attr("alignment-baseline","middle")
+let x = d3.scaleLinear().range([0, width]);
+let xAxis = d3.axisBottom().scale(x);
+
+svg.append("g")
+.attr("transform", "translate(0," + height + ")")
+.attr("class", "XAxis")
+.style("fill", "white");
+
+let y = d3.scaleLinear().range([height, 0]);
+let yAxis = d3.axisLeft().scale(y);
+svg.append("g")
+.attr("class", "YAxis")
+.style("fill", "white");
+
+const update = (data, title) => {
+
+ 
+
+    x.domain([0, d3.max(seasonLength)]);
+    svg.selectAll(".XAxis")
+    .transition()
+    .duration(1000)
+    .call(xAxis);
+
+    let teamOneMax = data["Liverpool"][38][1];
+    let teamTwoMax = data["Southampton"][38][1];
+
+    teamOneMax >= teamTwoMax ? y.domain([0, teamOneMax]) : y.domain([0, teamTwoMax]); 
+    
+    svg.selectAll(".YAxis")
+    .transition()
+    .duration(1000)
+    .call(yAxis)
+    
+    svg.select(".yaxis-text").text(title)
+
+    
+
+
+    let line1 = svg.selectAll(".line1")
+    let line2 = svg.selectAll(".line2")
+    
+    if (line1) {svg.selectAll(".line1").remove()}
+    if (line2) {svg.selectAll(".line2").remove()}
+
+    line1 = svg.selectAll(".line1").data([data], d => d["Liverpool"])
+    line2 = svg.selectAll(".line2").data([data], d => d["Southampton"])
+
+    line1
+    .enter()
+    .datum(data["Liverpool"])
+    .append("path")
+    .attr("class", "line1")
+    .merge(line1)
+    .transition()
+    .duration(1000)
+    .attr("d", d3.line()
+    .x(d => {return x(d[0]); })
+    .y(d => {return y(d[1]);}))
+    .attr("fill", "none")
+    .attr("stroke", "red")
+    .attr("stroke-width", 2.5)
+
+    line2.enter()
+    .datum(data["Southampton"])
+    .append("path")
+    .attr("class", "line2")
+    .merge(line2)
+    .transition()
+    .duration(1000)
+    .attr("d", d3.line()
+    .x(d => {return x(d[0]); })
+    .y(d => {return y(d[1]);}))
+    .attr("fill", "none")
+    .attr("stroke", "yellow")
+    .attr("stroke-width", 2.5)
 
   
+    // let line1Length = d3.selectAll(".line1").node().getTotalLength();
+    // let line2Length = d3.selectAll(".line2").node().getTotalLength();
+
+    // d3.selectAll(".line1").attr("stroke-dasharray", line1Length + " " + line1Length)
+    // .attr("stroke-dashoffset", line1Length)
+    // .transition()
+    // .duration(2000)
+    // .delay(200)
+    // .ease(d3.easeSin)
+    // .attr("stroke-dashoffset", 0)
+
+    
+    
+    
+   
+
+}
+
+update(seasonPoints, "Points");
+
+
+
+dropDownButton.on("change", function(d) {
+    let selectedOption = d3.select(this).property("value")
+    switch (selectedOption) {
+        case "Points":
+            update(seasonPoints, selectedOption);    
+            break;
+        case "Shots":
+            update(seasonShots, selectedOption);
+            break;
+        case "Shots on Target":
+            update(seasonShotsOnTarget, selectedOption);
+            break;
+        case "First Half Goals":
+            update(seasonFirstHalfGoals, selectedOption);
+            break;
+        case "Second Half Goals":
+            update(seasonSecondHalfGoals, selectedOption);
+            break;
+        case "Total Goals":
+            update(seasonGoals, selectedOption);
+            break;
+        case "Goals Against":
+            update(seasonGoalsAgainst, selectedOption);
+            break;
+        case "Corners":
+            update(seasonCorners, selectedOption);
+            break;
+        case "Fouls Commited":
+            update(seasonFoulsCommited, selectedOption);
+            break;
+        case "Fouls Against":
+            update(seasonFoulsAgainst, selectedOption);
+            break;
+        case "Yellow Cards":
+            update(seasonYellowCards, selectedOption);
+            break;
+        case "Red Cards":
+            update(seasonRedCards, selectedOption);
+            break;
+        default:
+            break;
+    }
+})
+  
+
     
 });
 
