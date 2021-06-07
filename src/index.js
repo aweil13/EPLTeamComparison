@@ -1,6 +1,43 @@
 
 import "./styles/index.scss";
 
+
+// Data objects, as soon as page is loaded these objects will be populated
+const nineTenStats = {teams: [], barGraphStats: {}, lineGraphStats: {}};
+const tenElevenStats = {teams: [], barGraphStats: {}, lineGraphStats: {}};
+const elevenTwelveStats = {teams: [], barGraphStats: {}, lineGraphStats: {}};
+const twelveThirteenStats = {teams: [], barGraphStats: {}, lineGraphStats: {}};
+const thirteenFourteenStats = {teams: [], barGraphStats: {}, lineGraphStats: {}};
+const fourteenFifteenStats = {teams: [], barGraphStats: {}, lineGraphStats: {}};
+const fifteenSixteenStats = {teams: [], barGraphStats: {}, lineGraphStats: {}};
+const sixteenSeventeenStats = {teams: [], barGraphStats: {}, lineGraphStats: {}};
+const seventeenEighteenStats = {teams: [], barGraphStats: {}, lineGraphStats: {}};
+const eighteenNineteenStats = {teams: [], barGraphStats: {}, lineGraphStats: {}};
+const ALL_TEAMS = [];
+
+// Statistics that will be used in the dropdown button selection and populating the data objects above
+const STATS = [
+    "Points",
+    "Shots", 
+    "Shots on Target",
+    "First Half Goals", 
+    "Second Half Goals", 
+    "Total Goals", 
+    "Goals Against", 
+    "Corners", 
+    "Fouls Commited", 
+    "Fouls Against", 
+    "Yellow Cards", 
+    "Red Cards"
+];
+
+
+// loop to create season length numbers array to loop through in the future
+const seasonLength = [];
+for (let i = 0; i < 39; i++) {
+    seasonLength.push(i);    
+}
+
 let teams = [];
 let seasonPoints = {};
 let seasonShots = {};
@@ -14,26 +51,46 @@ let seasonFoulsCommited = {};
 let seasonFoulsAgainst = {};
 let seasonYellowCards = {};
 let seasonRedCards = {};
-let seasonLength = [];
-
-const STATS = [
-    "Points",
-    "Shots", 
-    "Shots on Target",
-    "First Half Goals", 
-    "Second Half Goals", 
-    "Total Goals", 
-    "Goals Against", 
-    "Corners", 
-    "Fouls Commited", 
-    "Fouls Against", 
-    "Yellow Cards", 
-    "Red Cards"];
 
 
-for (let i = 0; i < 39; i++) {
-    seasonLength.push(i);    
+// Array for looping through data to populate objects
+const seasonArray = [
+["2009-2010", nineTenStats], 
+["2010-2011", tenElevenStats], 
+["2011-2012", elevenTwelveStats], 
+["2012-2013", twelveThirteenStats], 
+["2013-2014", thirteenFourteenStats], 
+["2014-2015", fourteenFifteenStats], 
+["2015-2016", fifteenSixteenStats], 
+["2016-2017", sixteenSeventeenStats], 
+["2017-2018", seventeenEighteenStats], 
+["2018-2019", eighteenNineteenStats]
+]
+
+
+// Loop to populate data objects
+for (let i = 0; i < seasonArray.length; i++) {
+    const season = seasonArray[i][0];
+    const seasonData = seasonArray[i][1];
+    d3.csv(`https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/${season}.csv`).then(data => {
+        
+        // Loop to populate ALL_TEAMS array for eventual search bar and for the teams array for each season
+        for (let i = 0; i < data.length; i++) {
+            const matchday = data[i];
+            if (!seasonData["teams"].includes(matchday["HomeTeam"])){
+                seasonData["teams"].push(matchday["HomeTeam"]);
+                if (!ALL_TEAMS.includes(matchday["HomeTeam"])) {ALL_TEAMS.push(matchday["HomeTeam"])}
+            } else if (!seasonData["teams"].includes(matchday["AwayTeam"])) {
+                seasonData["teams"].push(matchday["AwayTeam"]);
+                if (!ALL_TEAMS.includes(matchday["AwayTeam"])) {ALL_TEAMS.push(matchday["AwayTeam"])}
+            }
+        }
+    })
+    
 }
+
+console.log(thirteenFourteenStats["teams"])
+console.log(ALL_TEAMS);
 
 d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/2018-2019.csv")
 .then(data => {
