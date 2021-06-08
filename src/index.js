@@ -2,17 +2,238 @@
 import "./styles/index.scss";
 
 
+
 // Data objects, as soon as page is loaded these objects will be populated
-const nineTenStats = {teams: [], barGraphStats: {}, lineGraphStats: {}};
-const tenElevenStats = {teams: [], barGraphStats: {}, lineGraphStats: {}};
-const elevenTwelveStats = {teams: [], barGraphStats: {}, lineGraphStats: {}};
-const twelveThirteenStats = {teams: [], barGraphStats: {}, lineGraphStats: {}};
-const thirteenFourteenStats = {teams: [], barGraphStats: {}, lineGraphStats: {}};
-const fourteenFifteenStats = {teams: [], barGraphStats: {}, lineGraphStats: {}};
-const fifteenSixteenStats = {teams: [], barGraphStats: {}, lineGraphStats: {}};
-const sixteenSeventeenStats = {teams: [], barGraphStats: {}, lineGraphStats: {}};
-const seventeenEighteenStats = {teams: [], barGraphStats: {}, lineGraphStats: {}};
-const eighteenNineteenStats = {teams: [], barGraphStats: {}, lineGraphStats: {}};
+const nineTenStats = {teams: [], barGraphStats: {seasonPoints: {},
+seasonShots: {},
+seasonShotsOnTarget: {},
+seasonFirstHalfGoals: {},
+seasonSecondHalfGoals: {},
+seasonGoals: {},
+seasonGoalsAgainst: {},
+seasonCorners: {},
+seasonFoulsCommited: {},
+seasonFoulsAgainst: {},
+seasonYellowCards: {},
+seasonRedCards: {}}, lineGraphStats: {seasonPoints: {},
+seasonShots: {},
+seasonShotsOnTarget: {},
+seasonFirstHalfGoals: {},
+seasonSecondHalfGoals: {},
+seasonGoals: {},
+seasonGoalsAgainst: {},
+seasonCorners: {},
+seasonFoulsCommited: {},
+seasonFoulsAgainst: {},
+seasonYellowCards: {},
+seasonRedCards: {}}};
+const tenElevenStats = {teams: [], barGraphStats: {seasonPoints: {},
+seasonShots: {},
+seasonShotsOnTarget: {},
+seasonFirstHalfGoals: {},
+seasonSecondHalfGoals: {},
+seasonGoals: {},
+seasonGoalsAgainst: {},
+seasonCorners: {},
+seasonFoulsCommited: {},
+seasonFoulsAgainst: {},
+seasonYellowCards: {},
+seasonRedCards: {}}, lineGraphStats: {seasonPoints: {},
+seasonShots: {},
+seasonShotsOnTarget: {},
+seasonFirstHalfGoals: {},
+seasonSecondHalfGoals: {},
+seasonGoals: {},
+seasonGoalsAgainst: {},
+seasonCorners: {},
+seasonFoulsCommited: {},
+seasonFoulsAgainst: {},
+seasonYellowCards: {},
+seasonRedCards: {}}};
+const elevenTwelveStats = {teams: [], barGraphStats: {seasonPoints: {},
+seasonShots: {},
+seasonShotsOnTarget: {},
+seasonFirstHalfGoals: {},
+seasonSecondHalfGoals: {},
+seasonGoals: {},
+seasonGoalsAgainst: {},
+seasonCorners: {},
+seasonFoulsCommited: {},
+seasonFoulsAgainst: {},
+seasonYellowCards: {},
+seasonRedCards: {}}, lineGraphStats: {seasonPoints: {},
+seasonShots: {},
+seasonShotsOnTarget: {},
+seasonFirstHalfGoals: {},
+seasonSecondHalfGoals: {},
+seasonGoals: {},
+seasonGoalsAgainst: {},
+seasonCorners: {},
+seasonFoulsCommited: {},
+seasonFoulsAgainst: {},
+seasonYellowCards: {},
+seasonRedCards: {}}};
+const twelveThirteenStats = {teams: [], barGraphStats: {seasonPoints: {},
+seasonShots: {},
+seasonShotsOnTarget: {},
+seasonFirstHalfGoals: {},
+seasonSecondHalfGoals: {},
+seasonGoals: {},
+seasonGoalsAgainst: {},
+seasonCorners: {},
+seasonFoulsCommited: {},
+seasonFoulsAgainst: {},
+seasonYellowCards: {},
+seasonRedCards: {}}, lineGraphStats: {seasonPoints: {},
+seasonShots: {},
+seasonShotsOnTarget: {},
+seasonFirstHalfGoals: {},
+seasonSecondHalfGoals: {},
+seasonGoals: {},
+seasonGoalsAgainst: {},
+seasonCorners: {},
+seasonFoulsCommited: {},
+seasonFoulsAgainst: {},
+seasonYellowCards: {},
+seasonRedCards: {}}};
+const thirteenFourteenStats = {teams: [], barGraphStats: {seasonPoints: {},
+seasonShots: {},
+seasonShotsOnTarget: {},
+seasonFirstHalfGoals: {},
+seasonSecondHalfGoals: {},
+seasonGoals: {},
+seasonGoalsAgainst: {},
+seasonCorners: {},
+seasonFoulsCommited: {},
+seasonFoulsAgainst: {},
+seasonYellowCards: {},
+seasonRedCards: {}}, lineGraphStats: {seasonPoints: {},
+seasonShots: {},
+seasonShotsOnTarget: {},
+seasonFirstHalfGoals: {},
+seasonSecondHalfGoals: {},
+seasonGoals: {},
+seasonGoalsAgainst: {},
+seasonCorners: {},
+seasonFoulsCommited: {},
+seasonFoulsAgainst: {},
+seasonYellowCards: {},
+seasonRedCards: {}}};
+const fourteenFifteenStats = {teams: [], barGraphStats: {seasonPoints: {},
+seasonShots: {},
+seasonShotsOnTarget: {},
+seasonFirstHalfGoals: {},
+seasonSecondHalfGoals: {},
+seasonGoals: {},
+seasonGoalsAgainst: {},
+seasonCorners: {},
+seasonFoulsCommited: {},
+seasonFoulsAgainst: {},
+seasonYellowCards: {},
+seasonRedCards: {}}, lineGraphStats: {seasonPoints: {},
+seasonShots: {},
+seasonShotsOnTarget: {},
+seasonFirstHalfGoals: {},
+seasonSecondHalfGoals: {},
+seasonGoals: {},
+seasonGoalsAgainst: {},
+seasonCorners: {},
+seasonFoulsCommited: {},
+seasonFoulsAgainst: {},
+seasonYellowCards: {},
+seasonRedCards: {}}};
+const fifteenSixteenStats = {teams: [], barGraphStats: {seasonPoints: {},
+seasonShots: {},
+seasonShotsOnTarget: {},
+seasonFirstHalfGoals: {},
+seasonSecondHalfGoals: {},
+seasonGoals: {},
+seasonGoalsAgainst: {},
+seasonCorners: {},
+seasonFoulsCommited: {},
+seasonFoulsAgainst: {},
+seasonYellowCards: {},
+seasonRedCards: {}}, lineGraphStats: {seasonPoints: {},
+seasonShots: {},
+seasonShotsOnTarget: {},
+seasonFirstHalfGoals: {},
+seasonSecondHalfGoals: {},
+seasonGoals: {},
+seasonGoalsAgainst: {},
+seasonCorners: {},
+seasonFoulsCommited: {},
+seasonFoulsAgainst: {},
+seasonYellowCards: {},
+seasonRedCards: {}}};
+const sixteenSeventeenStats = {teams: [], barGraphStats: {seasonPoints: {},
+seasonShots: {},
+seasonShotsOnTarget: {},
+seasonFirstHalfGoals: {},
+seasonSecondHalfGoals: {},
+seasonGoals: {},
+seasonGoalsAgainst: {},
+seasonCorners: {},
+seasonFoulsCommited: {},
+seasonFoulsAgainst: {},
+seasonYellowCards: {},
+seasonRedCards: {}}, lineGraphStats: {seasonPoints: {},
+seasonShots: {},
+seasonShotsOnTarget: {},
+seasonFirstHalfGoals: {},
+seasonSecondHalfGoals: {},
+seasonGoals: {},
+seasonGoalsAgainst: {},
+seasonCorners: {},
+seasonFoulsCommited: {},
+seasonFoulsAgainst: {},
+seasonYellowCards: {},
+seasonRedCards: {}}};
+const seventeenEighteenStats = {teams: [], barGraphStats: {seasonPoints: {},
+seasonShots: {},
+seasonShotsOnTarget: {},
+seasonFirstHalfGoals: {},
+seasonSecondHalfGoals: {},
+seasonGoals: {},
+seasonGoalsAgainst: {},
+seasonCorners: {},
+seasonFoulsCommited: {},
+seasonFoulsAgainst: {},
+seasonYellowCards: {},
+seasonRedCards: {}}, lineGraphStats: {seasonPoints: {},
+seasonShots: {},
+seasonShotsOnTarget: {},
+seasonFirstHalfGoals: {},
+seasonSecondHalfGoals: {},
+seasonGoals: {},
+seasonGoalsAgainst: {},
+seasonCorners: {},
+seasonFoulsCommited: {},
+seasonFoulsAgainst: {},
+seasonYellowCards: {},
+seasonRedCards: {}}};
+const eighteenNineteenStats = {teams: [], barGraphStats: {seasonPoints: {},
+seasonShots: {},
+seasonShotsOnTarget: {},
+seasonFirstHalfGoals: {},
+seasonSecondHalfGoals: {},
+seasonGoals: {},
+seasonGoalsAgainst: {},
+seasonCorners: {},
+seasonFoulsCommited: {},
+seasonFoulsAgainst: {},
+seasonYellowCards: {},
+seasonRedCards: {}}, lineGraphStats: {seasonPoints: {},
+seasonShots: {},
+seasonShotsOnTarget: {},
+seasonFirstHalfGoals: {},
+seasonSecondHalfGoals: {},
+seasonGoals: {},
+seasonGoalsAgainst: {},
+seasonCorners: {},
+seasonFoulsCommited: {},
+seasonFoulsAgainst: {},
+seasonYellowCards: {},
+seasonRedCards: {}}};
 const ALL_TEAMS = [];
 
 // Statistics that will be used in the dropdown button selection and populating the data objects above
@@ -85,11 +306,89 @@ for (let i = 0; i < seasonArray.length; i++) {
                 if (!ALL_TEAMS.includes(matchday["AwayTeam"])) {ALL_TEAMS.push(matchday["AwayTeam"])}
             }
         }
+
+        // Nested loop to populate data objects for eventual graph output
+        for (let i = 0; i < seasonData["teams"].length; i++) {
+            const team = seasonData["teams"][i];
+            // line graph data
+            seasonData["lineGraphStats"]["seasonPoints"][team] = [[0,0]];
+            let lineGraphPoints = seasonData["lineGraphStats"]["seasonPoints"][team];
+            seasonData["lineGraphStats"]["seasonShots"][team] = [[0,0]];
+            let lineGraphShots = seasonData["lineGraphStats"]["seasonShots"][team];
+            seasonData["lineGraphStats"]["seasonShotsOnTarget"][team] = [[0,0]];
+            let lineGraphShotsOnTarget = seasonData["lineGraphStats"]["seasonShotsOnTarget"][team];
+            seasonData["lineGraphStats"]["seasonFirstHalfGoals"][team] = [[0,0]];
+            let lineGraphFirstHalfGoals = seasonData["lineGraphStats"]["seasonFirstHalfGoals"][team];
+            seasonData["lineGraphStats"]["seasonSecondHalfGoals"][team] = [[0,0]];
+            let lineGraphSecondHalfGoals = seasonData["lineGraphStats"]["seasonSecondHalfGoals"][team];
+            seasonData["lineGraphStats"]["seasonGoals"][team] = [[0,0]];
+            let lineGraphGoals = seasonData["lineGraphStats"]["seasonGoals"][team];
+            seasonData["lineGraphStats"]["seasonGoalsAgainst"][team] = [[0,0]];
+            let lineGraphGoalsAgainst = seasonData["lineGraphStats"]["seasonGoalsAgainst"][team];
+            seasonData["lineGraphStats"]["seasonCorners"][team] = [[0,0]];
+            let lineGraphCorners = seasonData["lineGraphStats"]["seasonCorners"][team];
+            seasonData["lineGraphStats"]["seasonFoulsCommited"][team] = [[0,0]];
+            let lineGraphFoulsCommited = seasonData["lineGraphStats"]["seasonFoulsCommited"][team];
+            seasonData["lineGraphStats"]["seasonFoulsAgainst"][team] = [[0,0]];
+            let lineGraphFoulsAgainst = seasonData["lineGraphStats"]["seasonFoulsAgainst"][team];
+            seasonData["lineGraphStats"]["seasonYellowCards"][team] = [[0,0]];
+            let lineGraphYellowCards = seasonData["lineGraphStats"]["seasonYellowCards"][team];
+            seasonData["lineGraphStats"]["seasonRedCards"][team] = [[0,0]];
+            let lineGraphRedCards = seasonData["lineGraphStats"]["seasonRedCards"][team];
+
+            // bar graph data
+            seasonData["barGraphStats"]["seasonPoints"][team] = 0;
+            let barGraphPoints = seasonData["barGraphStats"]["seasonPoints"][team];
+            seasonData["barGraphStats"]["seasonShots"][team] = 0;
+            let barGraphShots = seasonData["barGraphStats"]["seasonShots"][team];
+            seasonData["barGraphStats"]["seasonShotsOnTarget"][team] = 0;
+            let barGraphShotsOnTarget = seasonData["barGraphStats"]["seasonShotsOnTarget"][team];
+            seasonData["barGraphStats"]["seasonFirstHalfGoals"][team] = 0;
+            let barGraphFirstHalfGoals = seasonData["barGraphStats"]["seasonFirstHalfGoals"][team];
+            seasonData["barGraphStats"]["seasonSecondHalfGoals"][team] = 0;
+            let barGraphSecondHalfGoals = seasonData["barGraphStats"]["seasonSecondHalfGoals"][team];
+            seasonData["barGraphStats"]["seasonGoals"][team] = 0;
+            let barGraphGoals = seasonData["barGraphStats"]["seasonGoals"][team];
+            seasonData["barGraphStats"]["seasonGoalsAgainst"][team] = 0;
+            let barGraphGoalsAgainst = seasonData["barGraphStats"]["seasonGoalsAgainst"][team];
+            seasonData["barGraphStats"]["seasonCorners"][team] = 0;
+            let barGraphCorners = seasonData["barGraphStats"]["seasonCorners"][team];
+            seasonData["barGraphStats"]["seasonFoulsCommited"][team] = 0;
+            let barGraphFoulsCommited = seasonData["barGraphStats"]["seasonFoulsCommited"][team];
+            seasonData["barGraphStats"]["seasonFoulsAgainst"][team] = 0;
+            let barGraphFoulsAgainst = seasonData["barGraphStats"]["seasonFoulsAgainst"][team];
+            seasonData["barGraphStats"]["seasonYellowCards"][team] = 0;
+            let barGraphYellowCards = seasonData["barGraphStats"]["seasonYellowCards"][team];
+            seasonData["barGraphStats"]["seasonRedCards"][team] = 0;
+            let barGraphRedCards = seasonData["barGraphStats"]["seasonRedCards"][team];
+
+            // loop to populate data objects
+            for (let j = 0; j < data.length; j++) {
+                // single matchday data
+                let match = data[j];
+                
+                // line graph helper variables
+                let prevMatchday = lineGraphPoints[lineGraphPoints.length - 1][0];
+                let prevPoints = lineGraphPoints[lineGraphPoints.length - 1][1];
+                let prevShots = lineGraphShots[lineGraphPoints.length - 1][1];
+                let prevShotsOnTarget = lineGraphShotsOnTarget[lineGraphPoints.length - 1][1];
+                let prevFirstHalfGoals = lineGraphFirstHalfGoals[lineGraphPoints.length - 1][1];
+                let prevSecondHalfGoals = lineGraphSecondHalfGoals[lineGraphPoints.length - 1][1];
+                let prevGoals = lineGraphGoals[lineGraphPoints.length - 1][1];
+                let prevGoalsAgainst = lineGraphGoalsAgainst[lineGraphPoints.length - 1][1];
+                let prevCorners = lineGraphCorners[lineGraphPoints.length - 1][1];
+                let prevFoulsCommited = lineGraphFoulsCommited[lineGraphPoints.length - 1][1];
+                let prevFoulsAgainst = lineGraphFoulsAgainst[lineGraphPoints.length - 1][1];
+                let prevYellowCards = lineGraphYellowCards[lineGraphPoints.length - 1][1];
+                let prevRedCards = lineGraphRedCards[lineGraphPoints.length - 1][1];
+            }
+        }
+
     })
     
 }
 
-console.log(thirteenFourteenStats["teams"])
+console.log(fourteenFifteenStats["barGraphStats"])
 console.log(ALL_TEAMS);
 
 d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/2018-2019.csv")
