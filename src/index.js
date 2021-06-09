@@ -309,8 +309,9 @@ for (let i = 0; i < seasonArray.length; i++) {
 
         // Nested loop to populate data objects for eventual graph output
         for (let i = 0; i < seasonData["teams"].length; i++) {
-            const team = seasonData["teams"][i];
+            let team = seasonData["teams"][i];
             // line graph data
+            // debugger;
             seasonData["lineGraphStats"]["seasonPoints"][team] = [[0,0]];
             let lineGraphPoints = seasonData["lineGraphStats"]["seasonPoints"][team];
             seasonData["lineGraphStats"]["seasonShots"][team] = [[0,0]];
@@ -338,29 +339,18 @@ for (let i = 0; i < seasonArray.length; i++) {
 
             // bar graph data
             seasonData["barGraphStats"]["seasonPoints"][team] = 0;
-            let barGraphPoints = seasonData["barGraphStats"]["seasonPoints"][team];
             seasonData["barGraphStats"]["seasonShots"][team] = 0;
-            let barGraphShots = seasonData["barGraphStats"]["seasonShots"][team];
             seasonData["barGraphStats"]["seasonShotsOnTarget"][team] = 0;
-            let barGraphShotsOnTarget = seasonData["barGraphStats"]["seasonShotsOnTarget"][team];
             seasonData["barGraphStats"]["seasonFirstHalfGoals"][team] = 0;
-            let barGraphFirstHalfGoals = seasonData["barGraphStats"]["seasonFirstHalfGoals"][team];
             seasonData["barGraphStats"]["seasonSecondHalfGoals"][team] = 0;
-            let barGraphSecondHalfGoals = seasonData["barGraphStats"]["seasonSecondHalfGoals"][team];
             seasonData["barGraphStats"]["seasonGoals"][team] = 0;
-            let barGraphGoals = seasonData["barGraphStats"]["seasonGoals"][team];
             seasonData["barGraphStats"]["seasonGoalsAgainst"][team] = 0;
-            let barGraphGoalsAgainst = seasonData["barGraphStats"]["seasonGoalsAgainst"][team];
-            seasonData["barGraphStats"]["seasonCorners"][team] = 0;
-            let barGraphCorners = seasonData["barGraphStats"]["seasonCorners"][team];
-            seasonData["barGraphStats"]["seasonFoulsCommited"][team] = 0;
-            let barGraphFoulsCommited = seasonData["barGraphStats"]["seasonFoulsCommited"][team];
-            seasonData["barGraphStats"]["seasonFoulsAgainst"][team] = 0;
-            let barGraphFoulsAgainst = seasonData["barGraphStats"]["seasonFoulsAgainst"][team];
-            seasonData["barGraphStats"]["seasonYellowCards"][team] = 0;
-            let barGraphYellowCards = seasonData["barGraphStats"]["seasonYellowCards"][team];
+            seasonData["barGraphStats"]["seasonCorners"][team] = 0;            
+            seasonData["barGraphStats"]["seasonFoulsCommited"][team] = 0;            
+            seasonData["barGraphStats"]["seasonFoulsAgainst"][team] = 0;            
+            seasonData["barGraphStats"]["seasonYellowCards"][team] = 0;            
             seasonData["barGraphStats"]["seasonRedCards"][team] = 0;
-            let barGraphRedCards = seasonData["barGraphStats"]["seasonRedCards"][team];
+            
 
             // loop to populate data objects
             for (let j = 0; j < data.length; j++) {
@@ -368,27 +358,113 @@ for (let i = 0; i < seasonArray.length; i++) {
                 let match = data[j];
                 
                 // line graph helper variables
-                let prevMatchday = lineGraphPoints[lineGraphPoints.length - 1][0];
                 let prevPoints = lineGraphPoints[lineGraphPoints.length - 1][1];
-                let prevShots = lineGraphShots[lineGraphPoints.length - 1][1];
-                let prevShotsOnTarget = lineGraphShotsOnTarget[lineGraphPoints.length - 1][1];
-                let prevFirstHalfGoals = lineGraphFirstHalfGoals[lineGraphPoints.length - 1][1];
-                let prevSecondHalfGoals = lineGraphSecondHalfGoals[lineGraphPoints.length - 1][1];
-                let prevGoals = lineGraphGoals[lineGraphPoints.length - 1][1];
-                let prevGoalsAgainst = lineGraphGoalsAgainst[lineGraphPoints.length - 1][1];
-                let prevCorners = lineGraphCorners[lineGraphPoints.length - 1][1];
-                let prevFoulsCommited = lineGraphFoulsCommited[lineGraphPoints.length - 1][1];
-                let prevFoulsAgainst = lineGraphFoulsAgainst[lineGraphPoints.length - 1][1];
-                let prevYellowCards = lineGraphYellowCards[lineGraphPoints.length - 1][1];
-                let prevRedCards = lineGraphRedCards[lineGraphPoints.length - 1][1];
+                let prevMatchday = lineGraphPoints[lineGraphPoints.length - 1][0];
+                let prevShots = lineGraphShots[lineGraphShots.length - 1][1];
+                let prevShotsOnTarget = lineGraphShotsOnTarget[lineGraphShotsOnTarget.length - 1][1];
+                let prevFirstHalfGoals = lineGraphFirstHalfGoals[lineGraphFirstHalfGoals.length - 1][1];
+                let prevSecondHalfGoals = lineGraphSecondHalfGoals[lineGraphSecondHalfGoals.length - 1][1];
+                let prevGoals = lineGraphGoals[lineGraphGoals.length - 1][1];
+                let prevGoalsAgainst = lineGraphGoalsAgainst[lineGraphGoalsAgainst.length - 1][1];
+                let prevCorners = lineGraphCorners[lineGraphCorners.length - 1][1];
+                let prevFoulsCommited = lineGraphFoulsCommited[lineGraphFoulsCommited.length - 1][1];
+                let prevFoulsAgainst = lineGraphFoulsAgainst[lineGraphFoulsAgainst.length - 1][1];
+                let prevYellowCards = lineGraphYellowCards[lineGraphYellowCards.length - 1][1];
+                let prevRedCards = lineGraphRedCards[lineGraphRedCards.length - 1][1];
+                
+                // conditional for populating data objects with relevant team data
+                if ( match["HomeTeam"] === team){
+                    switch (match["FTR"]) {
+                        case "H":
+                            seasonData["barGraphStats"]["seasonPoints"][team] += 3
+                            lineGraphPoints.push([prevMatchday + 1, prevPoints + 3]);    
+                            break;
+                        case "D":
+                            seasonData["barGraphStats"]["seasonPoints"][team] += 1
+                            lineGraphPoints.push([prevMatchday + 1, prevPoints + 1]);    
+                            break;
+                        case "A":
+                            lineGraphPoints.push([prevMatchday + 1, prevPoints]);    
+                            break;
+                        default:
+                            break;
+                    } 
+                    // Line graph data array input for home games
+                    lineGraphShots.push([prevMatchday + 1, prevShots + parseInt(match["HS"])]);
+                    lineGraphShotsOnTarget.push([prevMatchday + 1, prevShotsOnTarget + parseInt(match["HST"])]);
+                    lineGraphFirstHalfGoals.push([prevMatchday + 1, prevFirstHalfGoals + parseInt(match["HTHG"])]);
+                    lineGraphSecondHalfGoals.push([prevMatchday + 1, prevSecondHalfGoals + (parseInt(match["FTHG"]) - parseInt(match["HTHG"]))]);
+                    lineGraphGoals.push([prevMatchday + 1, prevGoals + parseInt(match["FTHG"])]);
+                    lineGraphGoalsAgainst.push([prevMatchday + 1, prevGoalsAgainst + parseInt(match["FTAG"])]);
+                    lineGraphCorners.push([prevMatchday + 1, prevCorners + parseInt(match["HC"])]);
+                    lineGraphFoulsCommited.push([prevMatchday + 1, prevFoulsCommited + parseInt(match["HF"])]);
+                    lineGraphFoulsAgainst.push([prevMatchday + 1, prevFoulsAgainst + parseInt(match["AF"])]);
+                    lineGraphYellowCards.push([prevMatchday + 1, prevYellowCards + parseInt(match["HY"])]);
+                    lineGraphRedCards.push([prevMatchday + 1, prevRedCards + parseInt(match["HY"])]);
+
+                    // Bar Graph data array input for home games
+                    seasonData["barGraphStats"]["seasonPoints"][team] += parseInt(match["HS"]);
+                    seasonData["barGraphStats"]["seasonShotsOnTarget"][team] += parseInt(match["HST"]);
+                    seasonData["barGraphStats"]["seasonFirstHalfGoals"][team] += parseInt(match["HTHG"]);
+                    seasonData["barGraphStats"]["seasonSecondHalfGoals"][team] += (parseInt(match["FTHG"]) - parseInt(match["HTHG"]));
+                    seasonData["barGraphStats"]["seasonGoals"][team] += parseInt(match["FTHG"]);
+                    seasonData["barGraphStats"]["seasonGoalsAgainst"][team] += parseInt(match["FTAG"]);
+                    seasonData["barGraphStats"]["seasonCorners"][team] += parseInt(match["HC"]);
+                    seasonData["barGraphStats"]["seasonFoulsCommited"][team] += parseInt(match["HF"]);
+                    seasonData["barGraphStats"]["seasonFoulsAgainst"][team] += parseInt(match["AF"]);
+                    seasonData["barGraphStats"]["seasonYellowCards"][team] += parseInt(match["HY"]);
+                    seasonData["barGraphStats"]["seasonRedCards"][team] += parseInt(match["HR"]);
+                } else if (team === match["AwayTeam"]){
+                    switch (match["FTR"]) {
+                        case "A":
+                            seasonData["barGraphStats"]["seasonPoints"][team] += 3
+                            lineGraphPoints.push([prevMatchday + 1, prevPoints + 3])    
+                            break;
+                        case "D":
+                            seasonData["barGraphStats"]["seasonPoints"][team] += 1
+                            lineGraphPoints.push([prevMatchday + 1, prevPoints + 1])    
+                            break;
+                        case "H":
+                            lineGraphPoints.push([prevMatchday + 1, prevPoints])    
+                            break;
+                        default:
+                            break;   
+                }
+                // Line graph data array input for away games
+                lineGraphShots.push([prevMatchday + 1, prevShots + parseInt(match["AS"])]);
+                lineGraphShotsOnTarget.push([prevMatchday + 1, prevShotsOnTarget + parseInt(match["AST"])]);
+                lineGraphFirstHalfGoals.push([prevMatchday + 1, prevFirstHalfGoals + parseInt(match["HTAG"])]);
+                lineGraphSecondHalfGoals.push([prevMatchday + 1, prevSecondHalfGoals + (parseInt(match["FTAG"]) - parseInt(match["HTAG"]))]);
+                lineGraphGoals.push([prevMatchday + 1, prevGoals + parseInt(match["FTAG"])]);
+                lineGraphGoalsAgainst.push([prevMatchday + 1, prevGoalsAgainst + parseInt(match["FTHG"])]);
+                lineGraphCorners.push([prevMatchday + 1, prevCorners + parseInt(match["AC"])]);
+                lineGraphFoulsCommited.push([prevMatchday + 1, prevFoulsCommited + parseInt(match["AF"])]);
+                lineGraphFoulsAgainst.push([prevMatchday + 1, prevFoulsAgainst + parseInt(match["HF"])]);
+                lineGraphYellowCards.push([prevMatchday + 1, prevYellowCards + parseInt(match["AY"])]);
+                lineGraphRedCards.push([prevMatchday + 1, prevRedCards + parseInt(match["AY"])]);
+
+                // Bar Graph data array input for away games
+                seasonData["barGraphStats"]["seasonPoints"][team] += parseInt(match["AS"]);
+                seasonData["barGraphStats"]["seasonShotsOnTarget"][team] += parseInt(match["AST"]);
+                seasonData["barGraphStats"]["seasonFirstHalfGoals"][team] += parseInt(match["HTAG"]);
+                seasonData["barGraphStats"]["seasonSecondHalfGoals"][team] += (parseInt(match["FTAG"]) - parseInt(match["HTAG"]));
+                seasonData["barGraphStats"]["seasonGoals"][team] += parseInt(match["FTAG"]);
+                seasonData["barGraphStats"]["seasonGoalsAgainst"][team] += parseInt(match["FTHG"]);
+                seasonData["barGraphStats"]["seasonCorners"][team] += parseInt(match["AC"]);
+                seasonData["barGraphStats"]["seasonFoulsCommited"][team] += parseInt(match["AF"]);
+                seasonData["barGraphStats"]["seasonFoulsAgainst"][team] += parseInt(match["HF"]);
+                seasonData["barGraphStats"]["seasonYellowCards"][team] += parseInt(match["AY"]);
+                seasonData["barGraphStats"]["seasonRedCards"][team] += parseInt(match["AR"]);
+              
             }
         }
-
+      }
     })
     
 }
 
-console.log(fourteenFifteenStats["barGraphStats"])
+console.log(nineTenStats["lineGraphStats"]);
+console.log(tenElevenStats["barGraphStats"]);
 console.log(ALL_TEAMS);
 
 d3.csv("https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/data/2018-2019.csv")
