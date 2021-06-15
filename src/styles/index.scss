@@ -17,10 +17,81 @@ h1{
    margin-bottom: 20px;
 }
 
+.main{
+    width: 800px;
+    margin-top: 5%;
+}
+
+
+.pick-teams-title{
+    font-size: 40px;
+    color: whitesmoke;
+    font-family: "Bangers";
+    letter-spacing: 4px;
+    text-align: center;
+}
+
+.select-container{
+    display: flex;
+    justify-content: space-around;
+}
+
+.team1-input{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+
+.team1-input > *{
+    margin-top: 5%;
+    text-align: center;
+}
+.team2-input > *{
+    margin-top: 5%;
+    text-align: center;
+}
+
+.team2-input{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+
+label{
+    color: whitesmoke;
+}
+
+.team-label{
+    color: whitesmoke;
+    text-align: center;
+    font-family: "Bangers";
+    font-size: 40px;
+    letter-spacing: 4px;
+}
+
+.compare-button{
+    margin-left: 40%;
+    background: black;
+    color: whitesmoke;
+    margin-top: 50px;
+    width: 20%;
+    height: 50px;
+    font-size: 30px;
+    font-family: "Bangers";
+    letter-spacing: 5px;
+    border: 2px solid snow;
+}
+
+.compare-button:hover{
+    border: 2px solid rgb(141, 141, 141);
+    cursor: pointer;
+    color: rgb(187, 187, 187);
+}
+
 .line {
     stroke-width: 2px;
     fill: none;
-  }
+}
 
 text{
     color: white;
