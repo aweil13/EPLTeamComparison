@@ -1,12 +1,13 @@
 
 import LineGraph from './lineGraph';
+import BarGraph from './barGraph';
 import "./styles/index.scss";
 
 
 
 const MARGIN = {top: 30, right: 30, bottom: 80, left: 60},
-WIDTH = 600 - MARGIN.left - MARGIN.right,
-HEIGHT = 540 - MARGIN.top - MARGIN.bottom,
+WIDTH = 650 - MARGIN.left - MARGIN.right,
+HEIGHT = 590 - MARGIN.top - MARGIN.bottom,
 TEAMS = {team1: "", team2: ""},
 SEASONS = {season1: "", season2: ""},
 GRAPH = {line: false, bar: false};
@@ -116,6 +117,8 @@ const createBarGraph = (team1, season1, team2, season2) => {
     .attr("height", HEIGHT + MARGIN.top + MARGIN.bottom)
     .append("g")
     .attr("transform", "translate(" + MARGIN.left + "," + MARGIN.top + ")");
+
+    new BarGraph(svg, team1, season1, team2, season2)
 
     GRAPH.bar = true;
     GRAPH.line = false;

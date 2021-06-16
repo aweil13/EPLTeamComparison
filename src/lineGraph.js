@@ -1,6 +1,6 @@
 const MARGIN = {top: 30, right: 30, bottom: 80, left: 60},
-WIDTH = 600 - MARGIN.left - MARGIN.right,
-HEIGHT = 540 - MARGIN.top - MARGIN.bottom;
+WIDTH = 650 - MARGIN.left - MARGIN.right,
+HEIGHT = 590 - MARGIN.top - MARGIN.bottom;
 
 
  class LineGraph {
@@ -77,7 +77,7 @@ HEIGHT = 540 - MARGIN.top - MARGIN.bottom;
         ]).then(data => {
             // Loop to go through data and populate output data objects 
             for (let i = 0; i < data[0].length; i++) {
-              // Matchday objects
+              // Matchday vars
               let match1 = data[0][i];
               let match2 = data[1][i];
             
@@ -223,8 +223,8 @@ HEIGHT = 540 - MARGIN.top - MARGIN.bottom;
         // Graph Team Legend 
         this.svg.append("circle").attr("cx", 100).attr("cy", 45).attr("r", 4).style("fill", "red")            
         this.svg.append("circle").attr("cx", 100).attr("cy", 65).attr("r", 4).style("fill", "green")            
-        this.svg.append("text").attr("x", 120).attr("y", 50).style("fill", "white").text(`${this.team1}`)    
-        this.svg.append("text").attr("x", 120).attr("y", 70).style("fill", "white").text(`${this.team2}`)    
+        this.svg.append("text").attr("x", 120).attr("y", 50).style("fill", "white").text(`${this.team1} ${this.season1}`)    
+        this.svg.append("text").attr("x", 120).attr("y", 70).style("fill", "white").text(`${this.team2} ${this.season2}`)    
         
         // Dropdown button creation to change stats
         const dropDownButton = d3.select(".update-button-container").append("select").attr("class", "update-button");
@@ -270,71 +270,9 @@ HEIGHT = 540 - MARGIN.top - MARGIN.bottom;
         .attr("class", "YAxis")
         .style("fill", "white");
 
-        const update = (data, title) => {
-
-          x.domain([0, d3.max(this.seasonLength)]);
-          this.svg.selectAll(".XAxis")
-          .transition()
-          .duration(1000)
-          .call(xAxis);
-
-          let teamOneMax = data[this.team1][38][1];
-          let teamTwoMax = data[this.team2][38][1];
-
-          teamOneMax >= teamTwoMax ? y.domain([0, teamOneMax]) : y.domain([0, teamTwoMax]); 
-
-          this.svg.selectAll(".YAxis")
-          .transition()
-          .duration(1000)
-          .call(yAxis);
-
-          svg.select(".yaxis-text").text(title)
-
-          let line1 = this.svg.selectAll(".line1")
-          let line2 = this.svg.selectAll(".line2")
-
-          if (line1){this.svg.selectAll(".line1").remove()}
-          if (line2){this.svg.selectAll(".line2").remove()}
-
-          line1 = this.svg.selectAll(".line1").data([data], d => d[this.team1])
-          line2 = this.svg.selectAll(".line2").data([data], d => d[this.team2])
-
-          line1
-          .enter()
-          .datum(data[this.team1])
-          .append("path")
-          .attr("class", "line1")
-          .merge(line1)
-          .transition()
-          .duration(1000)
-          .attr("d", d3.line()
-          .x(d => {return x(d[0]); })
-          .y(d => {return y(d[1]); }))
-          .attr("fill", "none")
-          .attr("stroke", "red")
-          .attr("stroke-width", 2.5)
-          
-          line2
-          .enter()
-          .datum(data[this.team2])
-          .append("path")
-          .attr("class", "line1")
-          .merge(line1)
-          .transition()
-          .duration(1000)
-          .attr("d", d3.line()
-          .x(d => {return x(d[0]); })
-          .y(d => {return y(d[1]); }))
-          .attr("fill", "none")
-          .attr("stroke", "green")
-          .attr("stroke-width", 2.5)
-
-
-
-        }    
-
         this.update(this.seasonPoints, "Points", x, xAxis, y, yAxis);
 
+        // Dropdown Button Options to change data output
         let that = this;
         dropDownButton.on("change", function(d) {
           let selectedOption = d3.select(this).property("value");
@@ -385,62 +323,62 @@ HEIGHT = 540 - MARGIN.top - MARGIN.bottom;
 
      update(data, title, x, xAxis, y, yAxis){
 
-      x.domain([0, d3.max(this.seasonLength)]);
-      this.svg.selectAll(".XAxis")
-      .transition()
-      .duration(1000)
-      .call(xAxis);
+        x.domain([0, d3.max(this.seasonLength)]);
+        this.svg.selectAll(".XAxis")
+        .transition()
+        .duration(1000)
+        .call(xAxis);
 
-      let teamOneMax = data[this.team1][38][1];
-      let teamTwoMax = data[this.team2][38][1];
+        let teamOneMax = data[this.team1][38][1];
+        let teamTwoMax = data[this.team2][38][1];
 
-      teamOneMax >= teamTwoMax ? y.domain([0, teamOneMax]) : y.domain([0, teamTwoMax]); 
+        teamOneMax >= teamTwoMax ? y.domain([0, teamOneMax]) : y.domain([0, teamTwoMax]); 
 
-      this.svg.selectAll(".YAxis")
-      .transition()
-      .duration(1000)
-      .call(yAxis);
+        this.svg.selectAll(".YAxis")
+        .transition()
+        .duration(1000)
+        .call(yAxis);
 
-      this.svg.select(".yaxis-text").text(title)
+        this.svg.select(".yaxis-text").text(title)
 
-      let line1 = this.svg.selectAll(".line1")
-      let line2 = this.svg.selectAll(".line2")
+        let line1 = this.svg.selectAll(".line1")
+        let line2 = this.svg.selectAll(".line2")
 
-      if (line1){this.svg.selectAll(".line1").remove()}
-      if (line2){this.svg.selectAll(".line2").remove()}
+        if (line1){this.svg.selectAll(".line1").remove()}
+        if (line2){this.svg.selectAll(".line2").remove()}
 
-      line1 = this.svg.selectAll(".line1").data([data], d => d[this.team1])
-      line2 = this.svg.selectAll(".line2").data([data], d => d[this.team2])
+        line1 = this.svg.selectAll(".line1").data([data], d => d[this.team1])
+        line2 = this.svg.selectAll(".line2").data([data], d => d[this.team2])
 
-      line1
-      .enter()
-      .datum(data[this.team1])
-      .append("path")
-      .attr("class", "line1")
-      .merge(line1)
-      .transition()
-      .duration(1000)
-      .attr("d", d3.line()
-      .x(d => {return x(d[0]); })
-      .y(d => {return y(d[1]); }))
-      .attr("fill", "none")
-      .attr("stroke", "red")
-      .attr("stroke-width", 2.5)
-      
-      line2
-      .enter()
-      .datum(data[this.team2])
-      .append("path")
-      .attr("class", "line1")
-      .merge(line1)
-      .transition()
-      .duration(1000)
-      .attr("d", d3.line()
-      .x(d => {return x(d[0]); })
-      .y(d => {return y(d[1]); }))
-      .attr("fill", "none")
-      .attr("stroke", "green")
-      .attr("stroke-width", 2.5)
+        line1
+        .enter()
+        .datum(data[this.team1])
+        .append("path")
+        .attr("class", "line1")
+        .merge(line1)
+        .transition()
+        .duration(1000)
+        .attr("d", d3.line()
+        .x(d => {return x(d[0]); })
+        .y(d => {return y(d[1]); }))
+        .attr("fill", "none")
+        .attr("stroke", "red")
+        .attr("stroke-width", 2.5)
+        
+        line2
+        .enter()
+        .datum(data[this.team2])
+        .append("path")
+        .attr("class", "line1")
+        .merge(line1)
+        .transition()
+        .duration(1000)
+        .attr("d", d3.line()
+        .x(d => {return x(d[0]); })
+        .y(d => {return y(d[1]); }))
+        .attr("fill", "none")
+        .attr("stroke", "green")
+        .attr("stroke-width", 2.5)
 
 
 
