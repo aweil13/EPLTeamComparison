@@ -1,8 +1,12 @@
+
+import LineGraph from './lineGraph';
 import "./styles/index.scss";
 
+
+
 const MARGIN = {top: 30, right: 30, bottom: 80, left: 60},
-WIDTH = 700 - MARGIN.left - MARGIN.right,
-HEIGHT = 640 - MARGIN.top - MARGIN.bottom,
+WIDTH = 600 - MARGIN.left - MARGIN.right,
+HEIGHT = 540 - MARGIN.top - MARGIN.bottom,
 TEAMS = {team1: "", team2: ""},
 SEASONS = {season1: "", season2: ""},
 GRAPH = {line: false, bar: false};
@@ -94,6 +98,7 @@ const resetButton = (searchForm) => {
     buttonContainer.append("button").attr("class", "reset-button").text("Reset").on("click", function(d){
         removeGraph();
         removeChangeGraphButton();
+        removeUpdateButton();
         buttonContainer.selectChildren("button").remove();
         searchForm.style.display = "block";
         TEAMS["team1"] = "";
@@ -106,7 +111,7 @@ const resetButton = (searchForm) => {
 // function to create graphs
 const createBarGraph = (team1, season1, team2, season2) => {
     d3.select("svg").remove();
-    d3.select("#svg-container").append("svg")
+    let svg = d3.select("#svg-container").append("svg")
     .attr("width", WIDTH + MARGIN.left + MARGIN.right)
     .attr("height", HEIGHT + MARGIN.top + MARGIN.bottom)
     .append("g")
@@ -119,11 +124,13 @@ const createBarGraph = (team1, season1, team2, season2) => {
 
 const createLineGraph = (team1, season1, team2, season2) => {
     d3.select("svg").remove();
-    d3.select("#svg-container").append("svg")
+    let svg = d3.select("#svg-container").append("svg")
     .attr("width", WIDTH + MARGIN.left + MARGIN.right)
     .attr("height", HEIGHT + MARGIN.top + MARGIN.bottom)
     .append("g")
     .attr("transform", "translate(" + MARGIN.left + "," + MARGIN.top + ")");
+
+    new LineGraph(svg, team1, season1, team2, season2)
 
     GRAPH.line = true;
     GRAPH.bar = false;  
@@ -136,7 +143,8 @@ const createLineGraph = (team1, season1, team2, season2) => {
 // function to change graph to either line graph or bar graph
 const changeGraphButton = () => {
     d3.select(".change-graph-type-container").selectChildren("button").remove();
-    
+    removeUpdateButton();
+
     if (GRAPH.line === true && GRAPH.bar === false){
       d3.select(".change-graph-type-container")
       .append("button")
@@ -154,8 +162,12 @@ const changeGraphButton = () => {
         createLineGraph(TEAMS.team1, SEASONS.season1, TEAMS.team2, SEASONS.season2);
     })}
 }
-
+ 
 // function to remove change graph button
 const removeChangeGraphButton = () => {
   d3.select(".change-graph-button").remove();
+}
+
+const removeUpdateButton = () => {
+  d3.select(".update-button").remove();
 }
