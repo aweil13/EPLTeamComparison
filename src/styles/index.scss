@@ -30,6 +30,7 @@ html{
 }
 
 
+
 .pick-teams-title{
     font-size: 40px;
     color: whitesmoke;
@@ -120,11 +121,27 @@ footer{
     height: 30px;
 }
 
-footer span{
+.linkedin{
+    width: 30px;
+    height: 30px;
+    filter: brightness(0) invert(1);
+    margin-left: 10px;
+}
+
+.personal-site-link{
     color: white;
     margin-right: 30px;
     height: 2.0rem;
     font-size: 22px;
     font-family: "Bangers";
     letter-spacing: 2px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.personal-site-link:hover{
+    color: rgb(184, 184, 184);
+    cursor: pointer;
 }
