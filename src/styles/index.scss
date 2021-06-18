@@ -2,7 +2,7 @@ html{
     background-color: black;
     display: flex;
     justify-content: center;
-    height: 100%;
+    height: 1000px;
     width: 100%;
 }
 
@@ -18,8 +18,8 @@ html{
 }
 
 .main{
-    width: 800px;
-    margin-top: 2%;
+    width: 900px;
+    margin-top: 1%;
 }
 
 .premier-league-logo{
@@ -29,6 +29,29 @@ html{
     filter: brightness(0) invert(1);
 }
 
+.team-logos-container{
+    display: flex;
+    justify-content: center;
+}
+
+.team-logos-container img{
+    background-color: transparent;
+    width: 100px;
+    height: 80px;
+}
+
+.team-logos-container text{
+    color: whitesmoke;
+    font-size: 50px;
+    font-family: "Bangers";
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.update-button-container{
+    width: 15%;
+    margin: auto;
+}
 
 
 .pick-teams-title{
@@ -107,12 +130,56 @@ text{
 }
 
 
+
+#svg-container{
+    margin-left: 10%;
+}
+
+.graph-button-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.change-graph-button{
+    background: black;
+    color: whitesmoke;
+    margin-top: -3%;
+    width: 80%;
+    height: 50px;
+    font-size: 20px;
+    font-family: "Bangers";
+    letter-spacing: 3px;
+    border: 2px solid snow;
+    border-radius: 20px;
+}
+
+.graph-button-container button:hover{
+    border: 2px solid rgb(141, 141, 141);
+    cursor: pointer;
+    color: rgb(187, 187, 187);
+}
+
+.reset-button{
+    background: black;
+    color: whitesmoke;
+    margin-top: -3%;
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    font-family: "Bangers";
+    letter-spacing: 3px;
+    border: 2px solid snow;
+    border-radius: 20px;
+}
+
+
+
 footer{
     position: absolute;
     display: flex;
     bottom: 0;
     height: 2.5rem;
-    width: 500px;
+    width: 42%;
     justify-content: center;
 }
 

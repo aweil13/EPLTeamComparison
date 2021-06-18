@@ -186,11 +186,13 @@ const removeUpdateButton = () => {
 
 const populateLogos = (team1, team2) => {
   const container = d3.select(".team-logos-container");
-  container.append("img").attr("src", `https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/assets/team_logos/${team1}.png`);
-  container.append("img").attr("src", `https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/assets/team_logos/${team2}.png`);
+  container.append("img").attr("src", `https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/assets/team_logos/${team1}.png`).transition().duration(1500);
+  container.append("text").text("VS")
+  container.append("img").attr("src", `https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/assets/team_logos/${team2}.png`).transition().duration(1500);
 
 }
 
 const deleteLogos = () => {
   d3.select(".team-logos-container").selectChildren("img").remove();
+  d3.select(".team-logos-container").selectChildren("text").remove();
 }
