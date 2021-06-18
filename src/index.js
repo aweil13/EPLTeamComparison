@@ -58,6 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
             searchForm.style.display = "block";
         } else {
           createLineGraph(TEAMS["team1"], SEASONS["season1"], TEAMS["team2"], SEASONS["season2"]);
+          populateLogos(TEAMS["team1"], TEAMS["team2"]);
       }
     })
     
@@ -106,6 +107,7 @@ const resetButton = (searchForm) => {
         removeGraph();
         removeChangeGraphButton();
         removeUpdateButton();
+        deleteLogos();
         buttonContainer.selectChildren("button").remove();
         searchForm.style.display = "block";
         TEAMS["team1"] = "";
@@ -172,11 +174,23 @@ const changeGraphButton = () => {
     })}
 }
  
-// function to remove change graph button
+// functions to remove change graph button and update button
 const removeChangeGraphButton = () => {
   d3.select(".change-graph-button").remove();
 }
 
 const removeUpdateButton = () => {
   d3.select(".update-button").remove();
+}
+
+
+const populateLogos = (team1, team2) => {
+  const container = d3.select(".team-logos-container");
+  container.append("img").attr("src", `https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/assets/team_logos/${team1}.png`);
+  container.append("img").attr("src", `https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/assets/team_logos/${team2}.png`);
+
+}
+
+const deleteLogos = () => {
+  d3.select(".team-logos-container").selectChildren("img").remove();
 }
