@@ -44,8 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     compareButton.on("click", function(d) {
-        searchForm.style.display = "none";
         resetButton(searchForm);
+        searchForm.style.display = "none";
         
         TEAMS["team1"] = firstTeamSelector.value;
         TEAMS["team2"] = secondTeamSelector.value;
@@ -54,9 +54,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (TEAMS["team1"] === TEAMS["team2"] && SEASONS["season1"] === SEASONS["season2"]){
             alert("Please select different seasons if you wish to compare the same club!");
-
+            d3.select('.reset-button-container').selectChildren('button').remove();
+            searchForm.style.display = "block";
         } else {
-        createLineGraph(TEAMS["team1"], SEASONS["season1"], TEAMS["team2"], SEASONS["season2"]);}
+          createLineGraph(TEAMS["team1"], SEASONS["season1"], TEAMS["team2"], SEASONS["season2"]);
+      }
     })
     
 })
