@@ -52,7 +52,11 @@ document.addEventListener("DOMContentLoaded", () => {
         SEASONS["season1"] = teamOneSeasonSelector.value;
         SEASONS["season2"] = teamTwoSeasonSelector.value;
 
-        createLineGraph(TEAMS["team1"], SEASONS["season1"], TEAMS["team2"], SEASONS["season2"]);
+        if (TEAMS["team1"] === TEAMS["team2"] && SEASONS["season1"] === SEASONS["season2"]){
+            alert("Please select different seasons if you wish to compare the same club!");
+            
+        } else {
+        createLineGraph(TEAMS["team1"], SEASONS["season1"], TEAMS["team2"], SEASONS["season2"]);}
     })
     
 })
