@@ -49,9 +49,25 @@ html{
 }
 
 .update-button-container{
-    width: 15%;
+    width: 12%;
     margin: auto;
+    position: relative;
+    font-family: "Bangers";
+    background: bisque;
 }
+
+.update-button{
+    background: black;
+    color: white;
+    font-family: "Bangers";
+    font-size: 25px;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
+
 
 
 .pick-teams-title{
@@ -98,6 +114,7 @@ label{
     font-family: "Bangers";
     font-size: 40px;
     letter-spacing: 4px;
+    margin-bottom: 5%;
 }
 
 .compare-button{
@@ -154,7 +171,7 @@ text{
 }
 
 .graph-button-container button:hover{
-    border: 2px solid rgb(141, 141, 141);
+    border: 2px solid rgb(255, 0, 0);
     cursor: pointer;
     color: rgb(187, 187, 187);
 }
@@ -211,4 +228,52 @@ a{
 .personal-site-link:hover{
     color: rgb(184, 184, 184);
     cursor: pointer;
+}
+
+.team1-season{
+    margin: auto;
+    width: 62%;
+    color: white;
+    background: black;
+    font-family: "Bangers";
+    font-size: 25px;
+    margin-bottom: 3%;
+}
+.team2-season{
+    margin: auto;
+    width: 62%;
+    color: white;
+    background: black;
+    font-family: "Bangers";
+    font-size: 25px;
+    margin-bottom: 3%;
+}
+
+.team1-name{
+    margin: auto;
+    width: 55%;
+    color: white;
+    background: black;
+    font-family: "Bangers";
+    font-size: 25px;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+    text-align: center;
+}
+.team2-name{
+    margin: auto;
+    width: 55%;
+    color: white;
+    background: black;
+    font-family: "Bangers";
+    font-size: 25px;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+    text-align: center;
 }

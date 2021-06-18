@@ -56,6 +56,10 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Please select different seasons if you wish to compare the same club!");
             d3.select('.reset-button-container').selectChildren('button').remove();
             searchForm.style.display = "block";
+        } else if (TEAMS["team1"] === "" || TEAMS['team2'] === ""){
+            alert("Please select two Teams!");
+            d3.select('.reset-button-container').selectChildren('button').remove();
+            searchForm.style.display = "block";
         } else {
           createLineGraph(TEAMS["team1"], SEASONS["season1"], TEAMS["team2"], SEASONS["season2"]);
           populateLogos(TEAMS["team1"], TEAMS["team2"]);
@@ -186,9 +190,9 @@ const removeUpdateButton = () => {
 
 const populateLogos = (team1, team2) => {
   const container = d3.select(".team-logos-container");
-  container.append("img").attr("src", `https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/assets/team_logos/${team1}.png`).transition().duration(1500);
+  container.append("img").attr("src", `https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/assets/team_logos/${team1}.png`).transition().duration(1000);
   container.append("text").text("VS")
-  container.append("img").attr("src", `https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/assets/team_logos/${team2}.png`).transition().duration(1500);
+  container.append("img").attr("src", `https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/assets/team_logos/${team2}.png`).transition().duration(1000);
 
 }
 
