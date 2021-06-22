@@ -6,7 +6,7 @@
 * I'm a big fan of the english premier league(EPL) and have always been curious as to how the game has changed over the years. I wanted to create a website where users can compare two teams from any year in which they participated in the EPL. A lot of websites have team comparison graphs and charts but I have yet to find one that compares teams across different years. 
 
 ### High Level Overview
-* The EPL Team Comparison renders data by season for two individual teams selected by team name and by season of the EPL. Users will select two teams by name and then by season of EPL in which the teams participated in, can be different years by the teams. Site will render a graph for each team, or one big graph for both, comparing the teams in key stats such as points, goals scored, goals against, goals per minute, yellow cards, red cards, etc.
+* The EPL Team Comparison renders data by season for two individual teams selected by team name and by season of the EPL. Users will select two teams by name and then by season of EPL in which the teams participated in, can be different years by the teams. Site will render a graph displaying a comparison of the teams in key stats such as points, goals scored, goals against, goals per minute, yellow cards, red cards, etc.
 
 ## Functionality and MVP's
 
