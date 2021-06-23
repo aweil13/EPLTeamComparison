@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // form element
     const searchForm = document.querySelector("div.search-container");
 
+    // Compare button which generates graphs based on queried selections
     compareButton.on("click", function(d) {
         resetButton(searchForm);
         searchForm.style.display = "none";
