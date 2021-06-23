@@ -226,6 +226,7 @@ class BarGraph{
 
           this.update(this.seasonPointsTeamOne, this.seasonPointsTeamTwo, "Points", x, xAxis, y, yAxis);
 
+          // Dropdown button used for switching between statistics based on option selected
           let that = this;
           dropDownButton.on("change", function(d) {
             let selectedOption = d3.select(this).property("value");

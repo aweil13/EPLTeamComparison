@@ -24,24 +24,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const firstTeamSelector = document.querySelector("select.team1-name");
     const secondTeamSelector = document.querySelector("select.team2-name");
 
-    // form element
-    const searchForm = document.querySelector("div.search-container");
-
-    // submit button
-    const compareButton = d3.select(".compare-button")
-
     // on change selector events to populate team names
     teamOneSeasonSelector.onchange = (event) => {
       const season = event.target.value;
       removeTeamsFromSearch(".team1-name");
       populateTeamSelector(season, "team1-name");
     }
-
+    
     teamTwoSeasonSelector.onchange = (event) => {
       const season = event.target.value;
       removeTeamsFromSearch(".team2-name");
       populateTeamSelector(season, "team2-name");
     }
+    
+    // submit button
+    const compareButton = d3.select(".compare-button");
+
+    // form element
+    const searchForm = document.querySelector("div.search-container");
 
     compareButton.on("click", function(d) {
         resetButton(searchForm);
