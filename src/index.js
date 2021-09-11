@@ -188,7 +188,7 @@ const removeUpdateButton = () => {
   d3.select(".update-button").remove();
 }
 
-
+// function to load images for team logos
 const populateLogos = (team1, team2) => {
   const container = d3.select(".team-logos-container");
   container.append("img").attr("src", `https://raw.githubusercontent.com/aweil13/EPLTeamComparison/main/assets/team_logos/${team1}.png`).transition().duration(1000);
